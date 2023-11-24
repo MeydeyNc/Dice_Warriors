@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from Dice import *
-from rich import print
+from Dice import Dice, RiggedDice
+from dataclass import Buff
 
 
 class Character:
@@ -10,7 +10,7 @@ class Character:
     _current_health = _max_health
     _attack_value = 5
     _defense_value = 3
-    
+    buff = Buff()
     
     def __init__(self, name: str, dice: Dice) -> None:
         self._name = name
@@ -68,11 +68,6 @@ class Warrior(Character):
     def compute_damages(self, roll, target):
         print("🪓 Bonus: Axe in your face (+3 attack)")
         return super().compute_damages(roll, target) + 3
-
-class Mage(Character):
-    def compute_wounds(self, damages, roll, attacker):
-        print("🧙 Bonus: Magic armor (-3 wounds)")
-        return super().compute_wounds(damages, roll, attacker) - 3
 
 class Thief(Character):
     def compute_damages(self, roll, target: Character):
