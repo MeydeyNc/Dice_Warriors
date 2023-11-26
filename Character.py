@@ -12,8 +12,12 @@ class Character:
     _defense_value = 3
     buff = Buff()
     
-    def __init__(self, name: str, dice: Dice) -> None:
+    def __init__(self, name: str, max_health: int, attack: int, defense: int, dice) -> None:
         self._name = name
+        self._max_health = max_health
+        self._current_health = max_health
+        self._attack_value = attack
+        self._defense_value = defense
         self._dice = dice
         
     def __str__(self):
@@ -43,7 +47,7 @@ class Character:
         healthbar = f"[{"🥰" * self._current_health}{"🖤" * missing_hp}] {self._current_health}/{self._max_health}hp"
         print(healthbar)
 
-    def compute_damages(self, roll, target):
+    def compute_damages(self, roll, target: Character):
         return self._attack_value + roll
 
     def attack(self, target: Character):
@@ -54,7 +58,7 @@ class Character:
         print(f"⚔️ {self._name} attack {target.get_name()} with {damages} damages in your face ! (attack: {self._attack_value} + roll: {roll})")
         target.defense(damages, self)
     
-    def compute_wounds(self, damages, roll, attacker):
+    def compute_wounds(self, damages, roll, attacker: Character):
         return damages - self._defense_value - roll
     
     def defense(self, damages, attacker):
