@@ -1,7 +1,11 @@
 # Created by https://www.toptal.com/developers/gitignore/api/python
 # Edit at https://www.toptal.com/developers/gitignore?templates=python
-.env_dw/
-.idea/
+./env_dw/
+./idea/
+./Scripts/
+./pyenv.cfg
+./process.md
+
 notes.md
 ### Python ###
 # Byte-compiled / optimized / DLL files
