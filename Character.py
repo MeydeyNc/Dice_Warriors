@@ -10,7 +10,6 @@ class Character:
     _current_health = _max_health
     _attack_value = 5
     _defense_value = 3
-    buff = Buff()
     
     def __init__(self, name: str, max_health: int, attack: int, defense: int, dice) -> None:
         self._name = name
@@ -77,3 +76,5 @@ class Thief(Character):
     def compute_damages(self, roll, target: Character):
         print(f"🔪 Bonus: Sneacky attack (ignore defense: + {target.get_defense_value()} bonus)")
         return super().compute_damages(roll, target) + target.get_defense_value()
+    
+    
