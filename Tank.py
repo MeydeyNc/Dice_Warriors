@@ -24,23 +24,30 @@ class Leviathan(Character):
            return round(super().compute_wounds(damages, roll, attacker) - roll)
 
 class Guardian(Character):
-    pass
-    # def decrease_health(self, amount):
-    #     if (self._current_health < self._max_health):
-    #         roll = self._dice.roll(2) # On veut une pièce ou un dé 2 quoi
-    #         if not roll == 1:
-    #             return super().decrease_health(amount)
-    #         else : 
-    #             restore_roll = self._dice.roll(4) # On veut un dé 4
-    #             if (restore_roll == 4):
-    #                     print("🛡️ Bonus : The Guardian restored 4 health points")
-    #                     self._current_health += 4
-    #             elif (restore_roll == 1):
-    #                     print("🛡️ Malus : The Guardian failed to restore health points")
-    #                     return super().decrease_health(amount)
-    #             else:
-    #                 print(f"🛡️ Bonus : The Guardian restored {restore_roll} health points")
-    #                 self._current_health += restore_roll
+    # pass
+    def decrease_health(self, amount):
+       if (self._current_health < self._max_health):
+           coinThrow = randint(1,2)
+           if coinThrow == 1:
+               print("🛡️ Malus : The Guardian failed to restore health points")
+               super().decrease_health(amount)
+               
+           else : 
+               restore_roll = randint(1,10)
+               if (restore_roll == 10):
+                  print("🛡️ Bonus : The Guardian restored 4 health points")
+                  self._current_health += 10
+                  self.show_healthbar()
+                  
+               elif (restore_roll == 1):
+                  print("🛡️ Malus : The Guardian failed to restore health points")
+                  super().decrease_health(amount)
+                  
+               else:
+                  print(f"🛡️ Bonus : The Guardian restored {restore_roll} health points")
+                  self._current_health += restore_roll
+                  self.show_healthbar()
+        
 
 class Enforcer(Character): # Enforcer 
     # pass
