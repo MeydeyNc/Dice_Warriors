@@ -3,7 +3,6 @@ from __future__ import annotations
 from Dice import Dice, RiggedDice
 from dataclass import Buff
 
-
 class Character:
     
     _max_health = 20
@@ -31,20 +30,29 @@ class Character:
     
     def is_alive(self):
         # return bool(self._current_health)
-        return self._current_health > 0
+        return self._current_health > 0 & self._current_health <= self._max_health 
         
     def regenerate(self):
         self._current_health = self._max_health
         
     def decrease_health(self, amount):
         if (self._current_health - amount) < 0:
-            amount = self._current_health
+            amount = self._current_health  
+        elif self._max_health > 20:
+            self._max_health = 20
+        elif self._current_health > self._max_health:
+            self._current_health = self._max_health
+            
         self._current_health -= amount
         self.show_healthbar()
         
     def show_healthbar(self):
         missing_hp = self._max_health - self._current_health
-        healthbar = f"[{"🥰" * self._current_health}{"🖤" * missing_hp}] {self._current_health}/{self._max_health}hp"
+        healthbar = f"[{"❤️" * self._current_health}{"🖤" * missing_hp}] {self._current_health}/{self._max_health}hp"
+        if self._max_health > 20:
+            self._max_health = 20
+        elif self._current_health > self._max_health:
+            self._current_health = self._max_health
         print(healthbar)
 
     def compute_damages(self, roll, target: Character):
@@ -66,14 +74,3 @@ class Character:
         wounds = self.compute_wounds(damages, roll, attacker)
         print(f"🛡️ {self._name} take {wounds} wounds from {attacker.get_name()} in his face ! (damages: {damages} - defense: {self._defense_value} - roll: {roll})")
         self.decrease_health(wounds)
-
-
-class Warrior(Character):
-    def compute_damages(self, roll, target):
-        print("🪓 Bonus: Axe in your face (+3 attack)")
-        return super().compute_damages(roll, target) + 3
-
-class Thief(Character):
-    def compute_damages(self, roll, target: Character):
-        print(f"🔪 Bonus: Sneacky attack (ignore defense: + {target.get_defense_value()} bonus)")
-        return super().compute_damages(roll, target) + target.get_defense_value()

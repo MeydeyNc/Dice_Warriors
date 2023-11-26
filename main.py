@@ -1,12 +1,13 @@
-from Tank import Paladin, Leviathan
+from Tank import Paladin, Leviathan, Guardian, Enforcer
 from Attackers import Warrior, Thief
 from Dice import Dice
 
 def main():
     a_dice = Dice(6)
     
-    char1 = Warrior("Michel", 20, 8, 3, Dice(6))
-    char2 = Leviathan("Jason", 20, 8, 3, Dice(6))
+    char1 = Enforcer("Enforcer", 20, 3, 4, Dice(6))
+    char2 = Warrior("Warrior", 20, 4, 3, Dice(6))
+    
     print(char1)
     print(char2)
     
