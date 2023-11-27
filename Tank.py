@@ -11,27 +11,32 @@ class Paladin(Character):
     _defense_value = randint(10,15)
     
     def decrease_health(self, amount):
-        if (self._current_health < self._max_health):
-            
-        return super().decrease_health(amount)
-    
-    rollD4 = randint(1,4)
-    if rollD4 == 1:
-        def compute_wounds(self, damages, roll, attacker):
-            print("🔨 Bonus: Holy armor (-3 Wounds)")
-            if round(super().compute_wounds(damages, roll, attacker) - roll) <= 0:
-                return 0
+        if (amount >= 0):
+            rollD4 = randint(1,4)
+            if rollD4 == 1:
+                if amount <= 0 :
+                    amount = 0
+                else: 
+                    print(" Bonus : Holy Armor reduces wounds by 3")
+                    amount -= 3
+            elif rollD4 == 2:
+                randomAttack = randint(-3,5)
+                self._attack_value = self._attack_value + randomAttack
+                print(f" Bonus : The Paladin calls to the Holy light, {self._attack_value} : {randomAttack}")
+            elif rollD4 == 3:
+                randomDefense = randint(-1,7)
+                self._defense_value = self._defense_value + randomDefense
+                print(f" Bonus : The Paladin calls to his faith, {self._defense_value} : {randomDefense}")
             else:
-                return round(super().compute_wounds(damages, roll, attacker) - 3)
-    elif rollD4 == 2:
-        _attack_value = _attack_value + 3
-    elif rollD4 == 3:
-        _defense_value = _defense_value + 3
-    else:
-        if (_current_health > _max_health):
-                _current_health = _max_health
-        else:
-            _current_health += 3   
+                randomFaith = randint(-1,10)
+                if (self._current_health + randomFaith >= self._max_health):
+                        self._current_health = self._max_health
+                else:
+                    self._current_health += randomFaith  
+                    print(f" Bonus : The Paladin heals himself thanks to his faith, {self._current_health} : {randomFaith}")
+                    
+        return super().decrease_health(amount)
+      
 class Leviathan(Character):
     _max_health = randint(25,35)
     _current_health = _max_health
@@ -110,4 +115,15 @@ class Guardian(Character): # Enforcer
             self.show_healthbar()
        
 class Shield_Master(Character):
-   pass
+   def compute_wounds(self, damages, roll, attacker: Character):
+        rollD6 = randint(1,6)
+        if rollD6 == 1:
+            print(" Malus : The Shield_Master didn't succeeded in his parry")
+            return super().compute_wounds(damages, roll, attacker)
+        elif rollD6 == 6:
+            attacker.decrease_health(damages)
+            print(f" Bonus : The Shield_Master parried your attack ! (Sends back {damages})") 
+            return super().compute_wounds(0, 0, attacker)
+        else:
+            print(f"Bonus : Je pars ta race batard ! ({damages}/{rollD6} ≈ {round(damages/rollD6)})")
+            return super().compute_wounds(round(damages/rollD6), roll, attacker)

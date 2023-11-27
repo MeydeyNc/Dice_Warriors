@@ -1,4 +1,4 @@
-from Tank import Paladin, Leviathan, Guardian, Enforcer
+from Tank import Paladin, Leviathan, Guardian, Enforcer, Shield_Master
 from Attackers import Warrior, Thief
 from Dice import Dice
 
@@ -7,7 +7,7 @@ def main():
     
     
     
-    char1 = Guardian("Guardian", Dice(6))
+    char1 = Shield_Master("Shield_master", Dice(6))
     char2 = Warrior("Warrior", Dice(6))
     
     print(char1)
