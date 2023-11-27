@@ -1,18 +1,22 @@
 from __future__ import annotations
+from Dice import Dice, RiggedDice
 
-from Dice import *
+
 from rich import print
 
+print("\n")
 
 class Character:
-    
     _max_health = 20
     _current_health = _max_health
     _attack_value = 5
     _defense_value = 3
+    _bleed_damage = 0  
+    _rage_level = 0
+    _life_steal = 0
+
     
-    
-    def __init__(self, name: str, dice: Dice) -> None:
+    def __init__(self, name: str, dice) -> None:
         self._name = name
         self._dice = dice
         
@@ -33,14 +37,19 @@ class Character:
         self._current_health = self._max_health
         
     def decrease_health(self, amount):
-        if (self._current_health - amount) < 0:
-            amount = self._current_health
-        self._current_health -= amount
+        if amount <= 0:
+            return 
+
+        if self._current_health > amount:
+            self._current_health -= amount
+        else:
+            self._current_health = 0
+
         self.show_healthbar()
         
     def show_healthbar(self):
         missing_hp = self._max_health - self._current_health
-        healthbar = f"[{"🥰" * self._current_health}{"🖤" * missing_hp}] {self._current_health}/{self._max_health}hp"
+        healthbar = f"[{"💛" * self._current_health}{"🖤" * missing_hp}] {self._current_health}/{self._max_health} HP"
         print(healthbar)
 
     def compute_damages(self, roll, target):
@@ -51,30 +60,21 @@ class Character:
             return
         roll = self._dice.roll()
         damages = self.compute_damages(roll, target)
-        print(f"⚔️ {self._name} attack {target.get_name()} with {damages} damages in your face ! (attack: {self._attack_value} + roll: {roll})")
-        target.defense(damages, self)
+        print(f"⚔️  {self._name} attack {target.get_name()} with {damages} damages in your face ! (attack: {self._attack_value} + roll: {roll})")
+        target.defense(damages, self, roll)
     
     def compute_wounds(self, damages, roll, attacker):
-        return damages - self._defense_value - roll
+        if damages - self._defense_value - roll <= 0:
+            return 0
+        else:
+            return damages - self._defense_value - roll
     
-    def defense(self, damages, attacker):
-        roll = self._dice.roll()
+    def defense(self, damages, attacker, roll):
         wounds = self.compute_wounds(damages, roll, attacker)
-        print(f"🛡️ {self._name} take {wounds} wounds from {attacker.get_name()} in his face ! (damages: {damages} - defense: {self._defense_value} - roll: {roll})")
+        print(f"🛡️  {self._name} take {wounds} wounds from {attacker.get_name()} in his face ! (damages: {damages} - defense: {self._defense_value} - roll: {roll})")
         self.decrease_health(wounds)
 
+    def apply_defense_reduction(self, reduction, duration):
+        print(f"🔒  {self._name}'s defense reduced by {reduction} for {duration} turns.")
 
-class Warrior(Character):
-    def compute_damages(self, roll, target):
-        print("🪓 Bonus: Axe in your face (+3 attack)")
-        return super().compute_damages(roll, target) + 3
-
-class Mage(Character):
-    def compute_wounds(self, damages, roll, attacker):
-        print("🧙 Bonus: Magic armor (-3 wounds)")
-        return super().compute_wounds(damages, roll, attacker) - 3
-
-class Thief(Character):
-    def compute_damages(self, roll, target: Character):
-        print(f"🔪 Bonus: Sneacky attack (ignore defense: + {target.get_defense_value()} bonus)")
-        return super().compute_damages(roll, target) + target.get_defense_value()
+          
