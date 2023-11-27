@@ -66,6 +66,6 @@ while any(char.is_alive() for char in red_team.attackers + red_team.tanks) and a
                 if char.is_alive():
                     print(char)
                     char.show_healthbar()
-            break  # Exit the loop
+            break
 
     red_attacker_turn = not red_attacker_turn
