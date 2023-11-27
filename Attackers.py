@@ -39,10 +39,11 @@ class Thief(Character):
                 life_stolen = min(self._life_steal, self._max_health - self._current_health)
                 self._current_health += life_stolen
                 # self._current_health = min(self._current_health, self._max_health)
+                self._life_steal += self._life_steal
+                print(f"👤  Additional damage! Thief performs Life steal, gaining {life_stolen} life.")
             else:
                 pass
-            self._life_steal += self._life_steal
-            print(f"👤  Additional damage! Thief performs Life steal, gaining {life_stolen} life.")
+            # ??
         elif roll == 1: # ça retire 2 avant d'afficher donc on le voit pas mais ça fonctionne.
             self._life_steal -= 2
             self._life_steal = max(0, self._life_steal)
@@ -51,7 +52,6 @@ class Thief(Character):
             print(f"🎲 The roll result is {roll}. No additional damage or life steal this time!")
 
         return damages
-
 
 class Berserker(Character):
     _max_health = randint(18, 22)

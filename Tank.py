@@ -1,5 +1,4 @@
 from Character import *
-from Character import Character
 #from dataclass import Buff
 from random import randint
 
@@ -103,9 +102,11 @@ class Guardian(Character): # Enforcer
                 print(" 🔥♖ The Guardian enrages and gain defense !")
                 self._defense_value += 1
                 self._current_health -= amount
-                # if (self._defense_value > 100):
-                #     self._defense_value = 100
+                if (self._defense_value > 100):
+                    self._defense_value = 100
             self.show_healthbar()
+            
+            # Problème de decrease
        
 class Shield_Master(Character):
    def compute_wounds(self, damages, roll, attacker: Character):
