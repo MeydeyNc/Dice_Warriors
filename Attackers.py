@@ -3,8 +3,8 @@ from Character import *
 
 class Warrior(Character):
     def compute_damages(self, roll, target):
-        print("🪓 Bonus: Axe in your face (+3 attack)")
-        return super().compute_damages(roll, target) + 3
+        print("🪓 Bonus: Axe in your face (+16 attack)")
+        return super().compute_damages(roll, target) + 16
     
 class Thief(Character):
     def compute_damages(self, roll, target: Character):

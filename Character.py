@@ -11,12 +11,8 @@ class Character:
     _defense_value = 3
     buff = Buff()
     
-    def __init__(self, name: str, max_health: int, attack: int, defense: int, dice) -> None:
+    def __init__(self, name: str, dice) -> None:
         self._name = name
-        self._max_health = max_health
-        self._current_health = max_health
-        self._attack_value = attack
-        self._defense_value = defense
         self._dice = dice
         
     def __str__(self):
@@ -38,10 +34,12 @@ class Character:
     def decrease_health(self, amount):
         if (self._current_health - amount) < 0:
             amount = self._current_health  
-        elif self._max_health > 20:
-            self._max_health = 20
-        elif self._current_health > self._max_health:
-            self._current_health = self._max_health
+        elif (self._current_health - amount) > self._current_health:
+                amount = 0
+            # elif self._max_health > 20:
+        #     self._max_health = 20
+        # elif self._current_health > self._max_health:
+        #     self._current_health = self._max_health
             
         self._current_health -= amount
         self.show_healthbar()
@@ -49,10 +47,10 @@ class Character:
     def show_healthbar(self):
         missing_hp = self._max_health - self._current_health
         healthbar = f"[{"❤️" * self._current_health}{"🖤" * missing_hp}] {self._current_health}/{self._max_health}hp"
-        if self._max_health > 20:
-            self._max_health = 20
-        elif self._current_health > self._max_health:
-            self._current_health = self._max_health
+        # if self._max_health > 20:
+        #     self._max_health = 20
+        # elif self._current_health > self._max_health:
+        #     self._current_health = self._max_health
         print(healthbar)
 
     def compute_damages(self, roll, target: Character):
@@ -67,7 +65,10 @@ class Character:
         target.defense(damages, self)
     
     def compute_wounds(self, damages, roll, attacker: Character):
-        return damages - self._defense_value - roll
+        if self._defense_value + roll >= damages:
+            return 0
+        else:    
+            return (damages - self._defense_value) - roll
     
     def defense(self, damages, attacker):
         roll = self._dice.roll()

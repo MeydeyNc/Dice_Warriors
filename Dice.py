@@ -3,7 +3,7 @@ import random
 class Dice:
     
     def __init__(self, faces=6):
-        self._faces = faces
+        self._faces = 2 if faces <= 2 else faces
         
     def __str__(self):
         return f"I'm a {self._faces} faces dice"

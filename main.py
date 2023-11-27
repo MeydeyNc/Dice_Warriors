@@ -5,8 +5,10 @@ from Dice import Dice
 def main():
     a_dice = Dice(6)
     
-    char1 = Guardian("Guardian", 20, 3, 4, Dice(6))
-    char2 = Warrior("Warrior", 20, 4, 3, Dice(6))
+    
+    
+    char1 = Guardian("Guardian", Dice(6))
+    char2 = Warrior("Warrior", Dice(6))
     
     print(char1)
     print(char2)

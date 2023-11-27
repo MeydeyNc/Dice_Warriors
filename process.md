@@ -1,7 +1,13 @@
 # TANK : 
 
 ### Paladin : 
-   Obtiens de base une défense plus grande grâce à sa foi. 
+   - Obtiens de base une défense plus grande grâce à sa foi. 
+   - Pour le Paladin, on v aimplémenter la notion du dé pour le monsieur. 
+   - Dé 4 : 
+     - 1 : wounds - 3
+     - 2 : attaque augmentée
+     - 3 : défense augmentée
+     - 4 : Self heal
 
 ### Leviathan : 
  - Peut attirer l'attention et éviter les coups 
