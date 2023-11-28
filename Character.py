@@ -1,5 +1,6 @@
 from __future__ import annotations
 from Dice import Dice, RiggedDice
+from rich.console import Console
 
 class Character:
     _max_health = 20
@@ -9,6 +10,7 @@ class Character:
     _bleed_damage = 0  
     _rage_level = 0
     _life_steal = 0
+    console = Console()
 
     
     def __init__(self, name: str, dice) -> None:
@@ -43,7 +45,7 @@ class Character:
         #     self._max_health = 20
         # elif self._current_health > self._max_health:
         #     self._current_health = self._max_health
-        print(healthbar)
+        self.console.print(healthbar)
 
     def compute_damages(self, roll, target):
         return self._attack_value + roll
@@ -53,7 +55,7 @@ class Character:
             return
         roll = self._dice.roll()
         damages = self.compute_damages(roll, target)
-        print(f"⚔️  {self._name} attack {target.get_name()} with {damages} damages in your face ! (attack: {self._attack_value} + roll: {roll})")
+        self.console.print(f"⚔️  {self._name} attack {target.get_name()} with {damages} damages in your face ! (attack: {self._attack_value} + roll: {roll})")
         target.defense(damages, self, roll)
     
     def compute_wounds(self, damages, roll, attacker):
@@ -64,10 +66,10 @@ class Character:
     
     def defense(self, damages, attacker, roll):
         wounds = self.compute_wounds(damages, roll, attacker)
-        print(f"🛡️  {self._name} take {wounds} wounds from {attacker.get_name()} in his face ! (damages: {damages} - defense: {self._defense_value} - roll: {roll})")
+        self.console.print(f"🛡️  {self._name} take {wounds} wounds from {attacker.get_name()} in his face ! (damages: {damages} - defense: {self._defense_value} - roll: {roll})")
         self.decrease_health(wounds)
 
     def apply_defense_reduction(self, reduction, duration):
-        print(f"🔒  {self._name}'s defense reduced by {reduction} for {duration} turns.")
+        self.console.print(f"🔒  {self._name}'s defense reduced by {reduction} for {duration} turns.")
 
           
