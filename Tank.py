@@ -97,16 +97,17 @@ class Guardian(Character): # Enforcer
         else:
             rollD4 = randint(1,4)
             if not rollD4 == 4:
+                # decrease health
                 self.console.print(" 🔻♖ The Guardian failed to gain defense as he's weakened by the Attacker")
             else:
                 self.console.print(" 🔥♖ The Guardian enrages and gain defense !")
-                self._defense_value += 1
-                self._current_health -= amount
-                if (self._defense_value > 100):
-                    self._defense_value = 100
+                self._defense_value += amount
+                # self._current_health -= amount
+                # if (self._defense_value > 100):
+                #     self._defense_value = 100
             self.show_healthbar()
             
-            # Problème de decrease
+        super().decrease_health(amount)    # Problème de decrease
        
 class Shield_Master(Character):
    def compute_wounds(self, damages, roll, attacker: Character):

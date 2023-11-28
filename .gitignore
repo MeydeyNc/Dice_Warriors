@@ -1,6 +1,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/python
 # Edit at https://www.toptal.com/developers/gitignore?templates=python
-./env_dw/
+Include/
+/env_dw/
 notes.md
 test.py
 __pycache__/
