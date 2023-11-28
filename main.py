@@ -13,7 +13,7 @@ class Team:
     def __init__(self, is_red_team: bool):
         self.is_red_team = is_red_team
         self.tanks = self._create_team([Paladin, Leviathan, Phantom_Warden, Shield_Master, Guardian], _max_instances)  # Guardian
-        self.attackers = self._create_team([Samurai, Berserker, Mage, Warrior], _max_instances)  # Thief
+        self.attackers = self._create_team([Samurai, Berserker, Mage, Warrior, Thief], _max_instances)  # Thief
 
     def _create_team(self, character_classes, max_instances):
         character_instances = []

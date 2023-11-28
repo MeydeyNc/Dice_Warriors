@@ -38,11 +38,9 @@ class Thief(Character):
             if self._current_health < self._max_health:
                 life_stolen = min(self._life_steal, self._max_health - self._current_health)
                 self._current_health += life_stolen
-                # self._current_health = min(self._current_health, self._max_health)
+                self._current_health = min(self._current_health, self._max_health)
                 self._life_steal += self._life_steal
                 self.console.print(f"👤  Additional damage! Thief performs Life steal, gaining {life_stolen} life.")
-            else:
-                pass
             # ??
         elif roll == 1: # ça retire 2 avant d'afficher donc on le voit pas mais ça fonctionne.
             self._life_steal -= 2
