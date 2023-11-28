@@ -1,4 +1,4 @@
-from Tank import Paladin, Leviathan, Guardian, Enforcer, Shield_Master
+from Tank import Paladin, Leviathan, Guardian, Phantom_Warden, Shield_Master
 from Attackers import Warrior, Thief
 from Dice import Dice
 
