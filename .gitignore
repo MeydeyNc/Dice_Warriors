@@ -6,6 +6,7 @@ Scripts/
 test.py
 ./pyenv.cfg
 ./process.md
+pyvenv.cfg
 
 notes.md
 ### Python ###
