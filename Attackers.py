@@ -47,6 +47,7 @@ class Thief(Character):
             return damages
         else:
             self.console.print(f"🎲 The roll result is {roll}. No additional damage or life steal this time!")
+            
         return damages
 
 
@@ -118,9 +119,8 @@ class Mage(Character):
 
 
         elif roll == 1:
-            self._current_health -= self.target_defense_reduction
             self.console.print(f"🩸 The roll result is {roll}. You FAILED! Mage's Fireball backfires, inflicting self-damage.")
-            self.show_healthbar()
+            self.decrease_health(self.target_defense_reduction)
             return damage
         else:
             self.console.print(f"🎲 The roll result is {roll}. The Fireball does not inflict Burn!")
