@@ -40,7 +40,7 @@ class Character:
         
     def show_healthbar(self):
         missing_hp = self._max_health - self._current_health
-        healthbar = f"[{"❤️" * self._current_health}{"🖤" * missing_hp}] {self._current_health}/{self._max_health}hp"
+        healthbar = f"{self._name} [{"❤️" * self._current_health}{"🖤" * missing_hp}] {self._current_health}/{self._max_health}hp"
         # if self._max_health > 20:
         #     self._max_health = 20
         # elif self._current_health > self._max_health:
@@ -62,15 +62,14 @@ class Character:
         if damages - self._defense_value - roll <= 0 or damages == 0:
             return 0
         else:
-            print(f"computed :{damages - self._defense_value - roll}")
             return damages - self._defense_value - roll
     
     def defense(self, damages, attacker, roll):
         roll = self._dice.roll()
         wounds = 0 if damages == 0 else self.compute_wounds(damages, roll, attacker) 
-        self.console.print(f"🛡️  {self._name} take {wounds} wounds from {attacker.get_name()} in his face ! (damages: {damages} - defense: {self._defense_value} - roll: {roll})")
-        print(f"decrease {wounds}")
-        self.decrease_health(wounds)
+        if wounds > 0:
+            self.console.print(f"🛡️  {self._name} take {wounds} wounds from {attacker.get_name()} in his face ! (damages: {damages} - defense: {self._defense_value} - roll: {roll})")
+            self.decrease_health(wounds)
 
     def apply_defense_reduction(self, reduction):
         self.console.print(f"🔒  {self._name}'s defense reduced by {reduction}.")
