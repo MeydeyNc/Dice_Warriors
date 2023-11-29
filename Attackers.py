@@ -23,8 +23,6 @@ class Warrior(Character):
             self.console.print(f"🎲 The roll result is {roll}. No additional damage or life steal this time!")
 
         return damages
-    
-from random import randint
 
 class Thief(Character):  
     _max_health = randint(18, 22)
@@ -39,15 +37,14 @@ class Thief(Character):
 
         if roll == self._dice._faces: 
             if self._current_health < self._max_health:
-                life_stolen = min(self._life_steal, self._max_health - self._current_health)
-                self._current_health += life_stolen
-                self._current_health = min(self._current_health, self._max_health)
-                self._life_steal -= life_stolen
-                self.console.print(f"👤  Additional damage! Thief performs Life steal, gaining {life_stolen} life.")
+                self._current_health = min(self._current_health + self._life_steal, self._max_health)
+                self.console.print(f"👤  Additional damage! Thief performs Life steal, gaining {self._life_steal} life.")
+                self.show_healthbar()
+                return damages
         elif roll == 1:
-            self._life_steal -= 2
-            self._life_steal = max(0, self._life_steal)
+            self._life_steal = max(0, self._life_steal - 2)
             self.console.print(f"🩸 The roll result is {roll}. You FAILED! Thief's life steal reduced by {2}.")
+            return damages
         else:
             self.console.print(f"🎲 The roll result is {roll}. No additional damage or life steal this time!")
         return damages
@@ -58,21 +55,23 @@ class Berserker(Character):
     _current_health = _max_health
     _attack_value = randint(10, 15)
     _defense_value = randint(4, 7) 
-    _rage_level = -1
+    _rage_boost = 0
     def compute_damages(self, roll, target: Character):
-        self._rage_level += 1
+        self._rage_boost += 2
         damages = super().compute_damages(roll, target)
         if self._current_health < self._max_health:
-            self.console.print(f"🎭 Berserker enters rage level {self._rage_level}! Attack bonus: +{self._rage_level}")
-            damages += self._rage_level
+            
+            self.console.print(f"🎭 Berserker is enraged ! Attack bonus: +{self._rage_boost*2}")
+            return damages + self._rage_boost*2
+        
         if roll == self._dice._faces:
-            self.console.print(f"Additional damage! Attack bonus: {max(2,self._rage_level)}")
-            damages += max(2,self._rage_level)
+            self.console.print(f"Additional damage! Attack bonus: {max(2,self._rage_boost)}")
+            return damages + max(2,self._rage_boost)
         elif roll == 1:
-            self.console.print(f"🩸  The roll result is {roll}. You FAILED! Attack reduced by {max(2,self._rage_level)}.")
-            damages -= max(2,self._rage_level)
+            self.console.print(f"🩸  The roll result is {roll}. You FAILED! Attack reduced by {max(2,self._rage_boost)}.")
+            return damages - max(2,self._rage_boost)
         else:
-            self.console.print(f"🎲 The roll result is {roll}. No additional damage this time!")
+            self.console.print(f"🎲 The roll result is {roll}. No additional damages !")
         return damages
 
  
@@ -88,10 +87,11 @@ class Samurai(Character):
             self.console.print(f"💉 Bleeding attack! Inflicting additional damage over time. Roll = {roll}. Bonus {self._bleed_damage} attack")
             damage += self._bleed_damage
             self._bleed_damage += self._bleed_damage
+            return damage
         elif roll == 1:
-            print(f"🩸 The roll result is {roll}. You FAILED! Samurai inflicts self-damage, losing {self._bleed_damage} HP.")
+            print(f"🩸 The roll result is {roll}. You FAILED! Samurai inflicts self-damage, losing {self._bleed_damage if self._bleed_damage <= self._current_health - self._bleed_damage else self._current_health} HP.")
             self.decrease_health(self._bleed_damage)
-            damage = 0
+            return 0
         else:
             self.console.print(f"🎲 The roll result is {roll}. No additional damages this time!")
         return damage
@@ -102,17 +102,26 @@ class Mage(Character):
     _current_health = _max_health
     _attack_value = randint(10, 15)
     _defense_value = randint(4, 7)
+    target_defense_reduction = randint(4, 6)
     def compute_damages(self, roll, target: Character):
         print("🔥 Mage casts Fireball !")
-        self.burn_duration = 3 
         damage = super().compute_damages(roll, target)
         if roll == self._dice._faces:
-            self.console.print(f"🔥 {self._name}'s Fireball inflicts Burn! Defense reduction for {self.burn_duration} turns.")
-            target_defense_reduction = 6
-            target.apply_defense_reduction(target_defense_reduction, self.burn_duration)
+            self.console.print(f"🔥 {self._name}'s Fireball inflicts Burn! Defense reduction of {self.target_defense_reduction}.")
+            if target._defense_value >= self.target_defense_reduction :
+               target.apply_defense_reduction(self.target_defense_reduction)
+               return damage
+            else :
+                boost = self.target_defense_reduction - target._defense_value
+                target._defense_value = 0
+                return damage + boost
+
+
         elif roll == 1:
-            self._current_health -= 2
+            self._current_health -= self.target_defense_reduction
             self.console.print(f"🩸 The roll result is {roll}. You FAILED! Mage's Fireball backfires, inflicting self-damage.")
+            self.show_healthbar()
+            return damage
         else:
             self.console.print(f"🎲 The roll result is {roll}. The Fireball does not inflict Burn!")
         return damage
