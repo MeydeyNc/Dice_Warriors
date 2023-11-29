@@ -24,32 +24,34 @@ class Warrior(Character):
 
         return damages
     
-class Thief(Character):
+from random import randint
+
+class Thief(Character):  
     _max_health = randint(18, 22)
     _current_health = _max_health
     _attack_value = randint(10, 15)
     _defense_value = randint(4, 7)
     _life_steal = randint(2, 5)
+
     def compute_damages(self, roll, target: Character):
-        self.console.print(f"🔪 Bonus: Sneacky attack (ignore defense: + {target.get_defense_value()} bonus)")
+        self.console.print(f"🔪 Bonus: Sneaky attack (ignore defense: + {target.get_defense_value()} bonus)")
         damages = super().compute_damages(roll, target) + target.get_defense_value()
 
-        if roll == self._dice._faces:
+        if roll == self._dice._faces: 
             if self._current_health < self._max_health:
                 life_stolen = min(self._life_steal, self._max_health - self._current_health)
                 self._current_health += life_stolen
                 self._current_health = min(self._current_health, self._max_health)
-                self._life_steal += self._life_steal
+                self._life_steal -= life_stolen
                 self.console.print(f"👤  Additional damage! Thief performs Life steal, gaining {life_stolen} life.")
-            # ??
-        elif roll == 1: # ça retire 2 avant d'afficher donc on le voit pas mais ça fonctionne.
+        elif roll == 1:
             self._life_steal -= 2
             self._life_steal = max(0, self._life_steal)
             self.console.print(f"🩸 The roll result is {roll}. You FAILED! Thief's life steal reduced by {2}.")
         else:
             self.console.print(f"🎲 The roll result is {roll}. No additional damage or life steal this time!")
-
         return damages
+
 
 class Berserker(Character):
     _max_health = randint(18, 22)
@@ -104,7 +106,7 @@ class Mage(Character):
         print("🔥 Mage casts Fireball !")
         self.burn_duration = 3 
         damage = super().compute_damages(roll, target)
-        if roll < self._dice._faces:
+        if roll == self._dice._faces:
             self.console.print(f"🔥 {self._name}'s Fireball inflicts Burn! Defense reduction for {self.burn_duration} turns.")
             target_defense_reduction = 6
             target.apply_defense_reduction(target_defense_reduction, self.burn_duration)
