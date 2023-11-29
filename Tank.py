@@ -103,9 +103,9 @@ class Guardian(Character): # Enforcer
                 self.console.print(" 🔻♖ The Guardian failed to gain defense as he's weakened by the Attacker")
                 super().decrease_health(amount) 
             else:
-                if self._current_health - amount > 0:
-                    self._defense_value += amount
-                    self.console.print(f" 🔥♖ The Guardian enrages and gain {amount} defense points !")
+                if self._current_health - amount > 0 and amount -1 > 0:
+                    self._defense_value += amount -1
+                    self.console.print(f" 🔥♖ The Guardian enrages and gain {amount-1} defense points !")
                 super().decrease_health(amount) 
             self.show_healthbar()
             amount = max(0, amount) 
