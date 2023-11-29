@@ -6,7 +6,7 @@ from Character import *
 class Warrior(Character):
     _max_health = randint(18, 22)
     _current_health = _max_health
-    _attack_value = randint(10, 15)
+    _attack_value = randint(25, 40)
     _defense_value = randint(4, 7)
     _attack_bonus = randint(2, 5)
     def compute_damages(self, roll, target):
@@ -27,7 +27,7 @@ class Warrior(Character):
 class Thief(Character):  
     _max_health = randint(18, 22)
     _current_health = _max_health
-    _attack_value = randint(10, 15)
+    _attack_value = randint(25, 40)
     _defense_value = randint(4, 7)
     _life_steal = randint(2, 5)
 
@@ -54,7 +54,7 @@ class Thief(Character):
 class Berserker(Character):
     _max_health = randint(18, 22)
     _current_health = _max_health
-    _attack_value = randint(10, 15)
+    _attack_value = randint(25, 40)
     _defense_value = randint(4, 7) 
     _rage_boost = 0
     def compute_damages(self, roll, target: Character):
@@ -79,7 +79,7 @@ class Berserker(Character):
 class Samurai(Character):
     _max_health = randint(18, 22)
     _current_health = _max_health
-    _attack_value = randint(10, 15)
+    _attack_value = randint(25, 40)
     _defense_value = randint(4, 7)
     _bleed_damage = randint(2, 4)  
     def compute_damages(self, roll, target: Character):
@@ -101,7 +101,7 @@ class Samurai(Character):
 class Mage(Character):
     _max_health = randint(18, 22)
     _current_health = _max_health
-    _attack_value = randint(10, 15)
+    _attack_value = randint(25, 40)
     _defense_value = randint(4, 7)
     target_defense_reduction = randint(4, 6)
     def compute_damages(self, roll, target: Character):

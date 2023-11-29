@@ -5,8 +5,8 @@ from random import randint
 class Paladin(Character):
     _max_health = randint(30,45)
     _current_health = _max_health
-    _attack_value = randint(4,8)
-    _defense_value = randint(10,15)
+    _attack_value = randint(10,15)
+    _defense_value = randint(5,15)
     
     def decrease_health(self, amount):
         if (amount >= 0):
@@ -38,7 +38,7 @@ class Paladin(Character):
 class Phantom_Warden(Character):
     _max_health = randint(25,35)
     _current_health = _max_health
-    _attack_value = randint(3,8)
+    _attack_value = randint(10,15)
     _defense_value = randint(10,15)
     def compute_wounds(self, damages, roll, attacker):
        roll: int = self._dice.roll()
@@ -59,8 +59,8 @@ class Phantom_Warden(Character):
 class Leviathan(Character):
     _max_health = randint(25,35)
     _current_health = _max_health
-    _attack_value = randint(3,8)
-    _defense_value = randint(10,15)
+    _attack_value = randint(10,15)
+    _defense_value = randint(5,15)
     def decrease_health(self, amount):
         if (self._current_health < self._max_health):
            coinThrow = randint(1,2)
@@ -90,8 +90,8 @@ class Leviathan(Character):
 class Guardian(Character): # Enforcer 
     _max_health = randint(25,35)
     _current_health = _max_health
-    _attack_value = randint(3,8)
-    _defense_value = randint(10,15)    
+    _attack_value = randint(10,15)
+    _defense_value = randint(5,15)    
     def decrease_health(self, amount):
         if (self._current_health - amount) < 0:
             amount = self._current_health
@@ -104,8 +104,8 @@ class Guardian(Character): # Enforcer
                 super().decrease_health(amount) 
             else:
                 if self._current_health - amount > 0 and amount -1 > 0:
-                    self._defense_value += amount -1
-                    self.console.print(f" 🔥♖ The Guardian enrages and gain {amount-1} defense points !")
+                    self._defense_value += 2
+                    self.console.print(f" 🔥♖ The Guardian enrages and gain {2} defense points !")
                 super().decrease_health(amount) 
             self.show_healthbar()
             amount = max(0, amount) 

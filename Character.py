@@ -5,7 +5,7 @@ from rich.console import Console
 class Character:
     _max_health = 20
     _current_health = _max_health
-    _attack_value = 5
+    _attack_value = 10
     _defense_value = 3
     _bleed_damage = 0  
     _rage_level = 0
