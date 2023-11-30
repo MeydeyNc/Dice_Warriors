@@ -18,7 +18,7 @@ class Character:
         self._dice = dice
         
     def __str__(self):
-        return f"I'm {self._name} the Character with attack: {self._attack_value} and defense: {self._defense_value}"
+        return f"I'm {self._name} with attack: {self._attack_value} and defense: {self._defense_value}"
     
     def get_name(self):
         return self._name
@@ -67,6 +67,7 @@ class Character:
     def defense(self, damages, attacker):
         roll = self._dice.roll()
         wounds = 0 if damages == 0 else self.compute_wounds(damages, roll, attacker) 
+
         self.console.print(f"🛡️  {self._name} take {wounds} wounds from {attacker.get_name()} in his face ! (damages: {damages} - defense: {self._defense_value} - roll: {roll})")
         self.decrease_health(wounds)
 

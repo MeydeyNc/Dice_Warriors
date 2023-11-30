@@ -1,5 +1,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/python
 # Edit at https://www.toptal.com/developers/gitignore?templates=python
+Joker.py
+Healers.py
 Include/
 /env_dw/
 notes.md
