@@ -1,6 +1,7 @@
-from Character import *
-#from dataclass import Buff
 from random import randint
+
+from Character import Character
+
 
 class Paladin(Character):
     _max_health = randint(30,45)
@@ -37,7 +38,8 @@ class Paladin(Character):
                     self.console.print(f" 🟩 Bonus : 🧝 The {self._name} heals himself thanks to his faith ✨, HP + {self._current_health} (roll : {randomFaith})")
                     
         return super().decrease_health(amount)
-      
+
+
 class Phantom_Warden(Character):
     _max_health = randint(25,35)
     _current_health = _max_health
@@ -62,6 +64,7 @@ class Phantom_Warden(Character):
                 return 0
            else:
                return round(super().compute_wounds(damages, roll, attacker) - roll)
+
 
 class Leviathan(Character):
     _max_health = randint(25,35)
@@ -98,7 +101,7 @@ class Leviathan(Character):
         super().decrease_health(amount)
         
 
-class Guardian(Character): # Enforcer 
+class Guardian(Character):
     _max_health = randint(25,35)
     _current_health = _max_health
     _attack_value = randint(10,15)
@@ -114,7 +117,6 @@ class Guardian(Character): # Enforcer
         else:
             rollD4 = randint(1,4)
             if not rollD4 == 4:
-                # decrease health
                 self.console.print(f" 🟥 Malus : ♖ The {self._name} failed to gain defense as he's weakened by the Attacker 💔")
                 super().decrease_health(amount) 
             else:
@@ -122,8 +124,7 @@ class Guardian(Character): # Enforcer
                     self._defense_value += 2
                     self.console.print(f" 🟩 Bonus : ♖ The {self._name} enrages 💢 and gain 2 defense points !")
                 super().decrease_health(amount) 
-            # self.show_healthbar()
-            # amount = max(0, amount) 
+
                    
 class Shield_Master(Character):
     _max_health = randint(25,35)
@@ -146,6 +147,7 @@ class Shield_Master(Character):
         else:
             self.console.print(f" 🟩 Bonus : 🛡️ The {self._name} parried your attack 💫 ! ({damages}/{rollD6} ≈ {round(damages/rollD6)})")
             return super().compute_wounds(round(damages/rollD6), roll, attacker)
-        
+
+
 if __name__ == "__main__":
     exec(open("main.py").read())

@@ -1,6 +1,8 @@
 from __future__ import annotations
 from random import choice
+
 from rich.console import Console
+
 
 def attack_team(attacker, target_team):
     target_tanks = [tank for tank in target_team.tanks if tank.is_alive()]
@@ -15,7 +17,7 @@ def attack_team(attacker, target_team):
 
 def print_team_result(team, team_name):
     console = Console()
-    console.print(f"[bold {team_name}] {team_name} Team wins! [/bold {team_name}]")
+    console.print(f"[bold {team_name}3]   {team_name} Team wins! [/bold {team_name}3]")
     for char in team.attackers + team.tanks:
         if char.is_alive():
             chara = char.__str__()
@@ -35,6 +37,7 @@ def check_for_win(red_team, blue_team):
         print_team_result(blue_team, 'Blue')
         return True
     return False
+
 
 if __name__ == "__main__":
     exec(open("main.py").read())

@@ -1,6 +1,6 @@
 from __future__ import annotations
-from Dice import Dice, RiggedDice
 from rich.console import Console
+
 
 class Character:
     _max_health = 20
@@ -11,14 +11,13 @@ class Character:
     _rage_level = 0
     _life_steal = 0
     console = Console()
-
     
     def __init__(self, name: str, dice) -> None:
         self._name = name
         self._dice = dice
         
     def __str__(self):
-        return f"I'm {self._name} with attack: {self._attack_value} and defense: {self._defense_value}"
+        return f"I'm {self._name} with attack: [#FFA500]{self._attack_value}[/#FFA500] and defense: [#00A5FF]{self._defense_value}[/#00A5FF]"
     
     def get_name(self):
         return self._name
@@ -27,7 +26,6 @@ class Character:
         return self._defense_value
     
     def is_alive(self):
-        # return bool(self._current_health)
         return self._current_health > 0
         
     def regenerate(self):
@@ -37,18 +35,21 @@ class Character:
         amount = max(0, amount) 
         self._current_health = self._current_health - amount if self._current_health - amount >= 0 else 0
         self.show_healthbar()
+        if not self.is_alive():
+            return
         
     def show_healthbar(self):
         missing_hp = self._max_health - self._current_health
-        healthbar = f" {self._name} [{"❤️ " * self._current_health}{" " + "◼️ " * missing_hp}] {self._current_health}/{self._max_health}HP"
-        # if self._max_health > 20:
-        #     self._max_health = 20
-        # elif self._current_health > self._max_health:
-        #     self._current_health = self._max_health
-        self.console.print(healthbar)
-        print("------------------------------------------------")
-        
+        if self._current_health < self._max_health and self._current_health > 0:
+            healthbar = f" {self._name} [{"[green3]◼️[/green3]" * self._current_health}{"[dim]◼️[/dim]" * missing_hp}] [green]{self._current_health}[/green]/[green3]{self._max_health}[/green3] HP"
+        elif self._current_health == 0:
+            healthbar = f" {self._name} [{"[green3]◼️[/green3]" * self._current_health}{"[dim]◼️[/dim]" * missing_hp}] [grey50]{self._current_health}[/grey50]/[green3]{self._max_health}[/green3] HP"
+        else:
+            healthbar = f" {self._name} [{"[green3]◼️[/green3]" * self._current_health}{"[dim]◼️[/dim]" * missing_hp}] [green3]{self._current_health}[/green3]/[green3]{self._max_health}[/green3] HP"
 
+        self.console.print(healthbar)
+        self.console.rule(f"{self._name}", style='bold blue3' if 'blue' not in self._name else f'bold red3')
+        
     def compute_damages(self, roll, target):
         return self._attack_value + roll
 
@@ -76,6 +77,7 @@ class Character:
     def apply_defense_reduction(self, reduction):
         self.console.print(f" 🔒    {self._name}'s defense reduced by {reduction}.")
         self._defense_value -= reduction
+
 
 if __name__ == "__main__":
     exec(open("main.py").read())

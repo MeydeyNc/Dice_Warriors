@@ -1,15 +1,17 @@
 from __future__ import annotations
 from random import choice
-from rich.console import Console
+
 from Team import Team
 from Fight import attack_team, check_for_win
+
 
 if __name__ == "__main__":
     red_team = Team(is_red_team=True)
     blue_team = Team(is_red_team=False)
     red_attacker_turn = choice([True, False])
     
-    while any(char.is_alive() for char in red_team.attackers + red_team.tanks) and any(char.is_alive() for char in blue_team.attackers + blue_team.tanks):
+    while any(char.is_alive() for char in red_team.attackers + red_team.tanks) and any(
+        char.is_alive() for char in blue_team.attackers + blue_team.tanks):
         if red_attacker_turn:
             for attacker in red_team.attackers:
                 if attacker.is_alive():

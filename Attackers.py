@@ -1,6 +1,6 @@
 from random import randint
-from Dice import *
-from Character import *
+
+from Character import Character
 
 
 class Warrior(Character):
@@ -26,6 +26,7 @@ class Warrior(Character):
 
         return damages
 
+
 class Thief(Character):  
     _max_health = randint(18, 22)
     _current_health = _max_health
@@ -50,7 +51,7 @@ class Thief(Character):
             self._life_steal = max(0, self._life_steal - 2)
             self.console.print(f" 🟥 Malus : 🗡️ The {self._name} FAILED to steal HP from the {target._name} (rolled : {roll}) ! {self._name}'s life steal reduced by {2}.")
             return damages
-            
+             
         return damages
 
 
@@ -81,7 +82,7 @@ class Berserker(Character):
             return damages - max(2,self._rage_boost)
         return damages
 
- 
+
 class Samurai(Character):
     _max_health = randint(18, 22)
     _current_health = _max_health
@@ -134,6 +135,7 @@ class Mage(Character):
             return damage
         
         return damage
+
 
 if __name__ == "__main__":
     exec(open("main.py").read())
