@@ -5,8 +5,8 @@ from random import randint
 class Paladin(Character):
     _max_health = randint(30,45)
     _current_health = _max_health
-    _attack_value = randint(4,8)
-    _defense_value = randint(10,15)
+    _attack_value = randint(10,15)
+    _defense_value = randint(5,15)
     
     def decrease_health(self, amount):
         if (amount >= 0):
@@ -38,7 +38,7 @@ class Paladin(Character):
 class Phantom_Warden(Character):
     _max_health = randint(25,35)
     _current_health = _max_health
-    _attack_value = randint(3,8)
+    _attack_value = randint(10,15)
     _defense_value = randint(10,15)
     def compute_wounds(self, damages, roll, attacker):
        roll: int = self._dice.roll()
@@ -47,7 +47,8 @@ class Phantom_Warden(Character):
            return super().compute_wounds(0, 0, attacker)   
        elif (roll == 1):
            self.console.print("🔻👻 Malus : The Phantom_Warden missed is escape ... (Wounds x 2)")
-           return round(super().compute_wounds(damages, roll, attacker) * 2)
+           return super().compute_wounds(damages*2, roll, attacker)
+
        else:
            self.console.print(f" 👻💨 Bonus : The Phantom_Warden evaded the attack ! (Wounds - {roll})")
            if round(super().compute_wounds(damages, roll, attacker) - roll) <= 0:
@@ -58,8 +59,8 @@ class Phantom_Warden(Character):
 class Leviathan(Character):
     _max_health = randint(25,35)
     _current_health = _max_health
-    _attack_value = randint(3,8)
-    _defense_value = randint(10,15)
+    _attack_value = randint(10,15)
+    _defense_value = randint(5,15)
     def decrease_health(self, amount):
         if (self._current_health < self._max_health):
            coinThrow = randint(1,2)
@@ -89,26 +90,26 @@ class Leviathan(Character):
 class Guardian(Character): # Enforcer 
     _max_health = randint(25,35)
     _current_health = _max_health
-    _attack_value = randint(3,8)
-    _defense_value = randint(10,15)    
+    _attack_value = randint(10,15)
+    _defense_value = randint(5,15)    
     def decrease_health(self, amount):
         if (self._current_health - amount) < 0:
             amount = self._current_health
+            super().decrease_health(amount) 
         else:
             rollD4 = randint(1,4)
             if not rollD4 == 4:
                 # decrease health
                 self.console.print(" 🔻♖ The Guardian failed to gain defense as he's weakened by the Attacker")
+                super().decrease_health(amount) 
             else:
-                self.console.print(" 🔥♖ The Guardian enrages and gain defense !")
-                self._defense_value += amount
-                # self._current_health -= amount
-                # if (self._defense_value > 100):
-                #     self._defense_value = 100
+                if self._current_health - amount > 0 and amount -1 > 0:
+                    self._defense_value += 2
+                    self.console.print(f" 🔥♖ The Guardian enrages and gain {2} defense points !")
+                super().decrease_health(amount) 
             self.show_healthbar()
-            
-        super().decrease_health(amount)    # Problème de decrease
-       
+            amount = max(0, amount) 
+                   
 class Shield_Master(Character):
    def compute_wounds(self, damages, roll, attacker: Character):
         rollD6 = randint(1,6)
@@ -116,9 +117,9 @@ class Shield_Master(Character):
             self.console.print(" 🔻🛡️ Malus : The Shield_Master didn't succeeded in his parry")
             return super().compute_wounds(damages, roll, attacker)
         elif rollD6 == 6:
-            attacker.decrease_health(damages)
-            self.console.print(f" 💢🛡️ Bonus : The Shield_Master parried your attack for a Critical Hit ! (Sends back {damages})") 
-            return super().compute_wounds(0, 0, attacker)
+            self.console.print(f" 💢🛡️ Bonus : The Shield_Master parried your attack for a Critical Hit ! (Sends back {damages})")
+            attacker.decrease_health(damages) 
+            return 0
         else:
             self.console.print(f" 💫🛡️ Bonus : The Shield_Master parried your attack ! ({damages}/{rollD6} ≈ {round(damages/rollD6)})")
             return super().compute_wounds(round(damages/rollD6), roll, attacker)
