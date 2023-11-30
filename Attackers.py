@@ -95,7 +95,7 @@ class Samurai(Character):
     def compute_damages(self, roll, target: Character):
         damage = super().compute_damages(roll, target)
         if roll == self._dice._faces:
-            self.console.print(f" 🟩 Bonus : 👺 The {self._name} inflicted a deep wound making {target.get_name} bleed for additional {self._bleed_damage} overturns damages (rolled = {roll})")
+            self.console.print(f" 🟩 Bonus : 👺 The {self._name} inflicted a deep wound making {target._name} bleed for additional {self._bleed_damage} overturns damages (rolled = {roll})")
             damage += self._bleed_damage
             self._bleed_damage += self._bleed_damage
             return damage
