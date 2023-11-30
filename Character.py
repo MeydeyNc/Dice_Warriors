@@ -40,12 +40,14 @@ class Character:
         
     def show_healthbar(self):
         missing_hp = self._max_health - self._current_health
-        healthbar = f"{self._name} [{"❤️" * self._current_health}{"🖤" * missing_hp}] {self._current_health}/{self._max_health}hp"
+        healthbar = f" {self._name} [{"❤️ " * self._current_health}{" " + "◼️ " * missing_hp}] {self._current_health}/{self._max_health}HP"
         # if self._max_health > 20:
         #     self._max_health = 20
         # elif self._current_health > self._max_health:
         #     self._current_health = self._max_health
         self.console.print(healthbar)
+        print("------------------------------------------------")
+        
 
     def compute_damages(self, roll, target):
         return self._attack_value + roll
@@ -55,7 +57,7 @@ class Character:
             return
         roll = self._dice.roll()
         damages = self.compute_damages(roll, target)
-        self.console.print(f"⚔️  {self._name} attack {target.get_name()} with {damages} damages in your face ! (attack: {self._attack_value} + roll: {roll})")
+        self.console.print(f" ⚔️    {self._name} attack {target.get_name()} with {damages} damages in your face ! (attack: {self._attack_value} + roll: {roll})")
         target.defense(damages, self)
     
     def compute_wounds(self, damages, roll, attacker):
@@ -68,11 +70,11 @@ class Character:
         roll = self._dice.roll()
         wounds = 0 if damages == 0 else self.compute_wounds(damages, roll, attacker) 
 
-        self.console.print(f"🛡️  {self._name} take {wounds} wounds from {attacker.get_name()} in his face ! (damages: {damages} - defense: {self._defense_value} - roll: {roll})")
+        self.console.print(f" 🛡️    {self._name} take {wounds} wounds from {attacker.get_name()} in his face ! (damages: {damages} - defense: {self._defense_value} - roll: {roll})")
         self.decrease_health(wounds)
 
     def apply_defense_reduction(self, reduction):
-        self.console.print(f"🔒  {self._name}'s defense reduced by {reduction}.")
+        self.console.print(f" 🔒    {self._name}'s defense reduced by {reduction}.")
         self._defense_value -= reduction
 
 if __name__ == "__main__":
