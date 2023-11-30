@@ -123,3 +123,6 @@ class Shield_Master(Character):
         else:
             self.console.print(f" 💫🛡️ Bonus : {self._name} parried your attack ! ({damages}/{rollD6} ≈ {round(damages/rollD6)})")
             return super().compute_wounds(round(damages/rollD6), roll, attacker)
+        
+if __name__ == "__main__":
+    exec(open("main.py").read())

@@ -75,4 +75,5 @@ class Character:
         self.console.print(f"🔒  {self._name}'s defense reduced by {reduction}.")
         self._defense_value -= reduction
 
-          
+if __name__ == "__main__":
+    exec(open("main.py").read())

@@ -15,3 +15,6 @@ class RiggedDice(Dice):
     
     def roll(self, rigged=False):
         return self._faces if rigged else super().roll()
+    
+if __name__ == "__main__":
+    exec(open("main.py").read())

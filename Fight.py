@@ -35,3 +35,6 @@ def check_for_win(red_team, blue_team):
         print_team_result(blue_team, 'Blue')
         return True
     return False
+
+if __name__ == "__main__":
+    exec(open("main.py").read())

@@ -126,3 +126,5 @@ class Mage(Character):
             self.console.print(f"🎲 The roll result is {roll}. The {self._name}'s Fireball does not inflict Burn!")
         return damage
 
+if __name__ == "__main__":
+    exec(open("main.py").read())

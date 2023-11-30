@@ -22,3 +22,6 @@ class Team:
 
         shuffle(character_instances)
         return character_instances[:self._team_len]
+    
+if __name__ == "__main__":
+    exec(open("main.py").read())
