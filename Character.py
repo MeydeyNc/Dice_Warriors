@@ -56,7 +56,7 @@ class Character:
         roll = self._dice.roll()
         damages = self.compute_damages(roll, target)
         self.console.print(f"⚔️  {self._name} attack {target.get_name()} with {damages} damages in your face ! (attack: {self._attack_value} + roll: {roll})")
-        target.defense(damages, self, roll)
+        target.defense(damages, self)
     
     def compute_wounds(self, damages, roll, attacker):
         if damages - self._defense_value - roll <= 0 or damages == 0:
@@ -64,7 +64,7 @@ class Character:
         else:
             return damages - self._defense_value - roll
     
-    def defense(self, damages, attacker, roll):
+    def defense(self, damages, attacker):
         roll = self._dice.roll()
         wounds = 0 if damages == 0 else self.compute_wounds(damages, roll, attacker) 
         if wounds > 0:
