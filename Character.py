@@ -67,9 +67,8 @@ class Character:
     def defense(self, damages, attacker):
         roll = self._dice.roll()
         wounds = 0 if damages == 0 else self.compute_wounds(damages, roll, attacker) 
-        if wounds > 0:
-            self.console.print(f"🛡️  {self._name} take {wounds} wounds from {attacker.get_name()} in his face ! (damages: {damages} - defense: {self._defense_value} - roll: {roll})")
-            self.decrease_health(wounds)
+        self.console.print(f"🛡️  {self._name} take {wounds} wounds from {attacker.get_name()} in his face ! (damages: {damages} - defense: {self._defense_value} - roll: {roll})")
+        self.decrease_health(wounds)
 
     def apply_defense_reduction(self, reduction):
         self.console.print(f"🔒  {self._name}'s defense reduced by {reduction}.")

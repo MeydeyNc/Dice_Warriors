@@ -6,8 +6,8 @@ from Tank import Paladin, Leviathan, Phantom_Warden, Shield_Master, Guardian
 from Dice import Dice
 
 _game_dice = randint(4, 9)
-_team_len = randint(1, 8)
-_max_instances = 1 # of each class
+_team_len = 1000 # by class (2 to 12*_max_instances)
+_max_instances = 266 # of each class
 
 class Team:
     def __init__(self, is_red_team: bool):
@@ -82,6 +82,6 @@ if __name__ == "__main__":
                     if not char.is_alive():
                         console.print(char)
                         char.show_healthbar()
-                break
+                        break
 
         red_attacker_turn = not red_attacker_turn
