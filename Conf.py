@@ -73,4 +73,5 @@ def set_conf(bool: bool):
     set_Character(bool)
     set_Team(bool)
     
-set_conf(True)
+if __name__ == "__main__":
+    exec(open("main.py").read())

@@ -22,3 +22,4 @@ def ask_user(question:str):
 if __name__ == "__main__":
     set_conf(False)
     exec(open("main.py").read())
+    set_conf(True)
