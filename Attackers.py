@@ -18,7 +18,7 @@ class Warrior(Character):
     def compute_damages(self, roll, target):
         damages = super().compute_damages(roll, target)
         if roll == self._dice._faces:
-            self.console.print(f" 🟩 Bonus : ⚔️ The {self._name}'s sword slashed severely {target._name} with {self._attack_bonus} attack bonus 💢")
+            self.console.print(f" 🟩 Bonus : ⚔️ The {self._name}'s sword slashed severely {target.get_name()} with {self._attack_bonus} attack bonus 💢")
             damages += self._attack_bonus
             self._attack_bonus += self._attack_bonus
         elif roll == 1:
@@ -41,7 +41,7 @@ class Thief(Character):
         return super().__str__()
 
     def compute_damages(self, roll, target: Character):
-        self.console.print(f" 🟩 Bonus : 🗡️ {self._name}'s sneaky attack 🗡️ ignored the {target._name}'s defense : {target.get_defense_value()})")
+        self.console.print(f" 🟩 Bonus : 🗡️ {self._name}'s sneaky attack 🗡️ ignored the {target.get_name()}'s defense : {target.get_defense_value()})")
         damages = super().compute_damages(roll, target) + target.get_defense_value()
 
         if roll == self._dice._faces: 
@@ -52,7 +52,7 @@ class Thief(Character):
                 return damages
         elif roll == 1:
             self._life_steal = max(0, self._life_steal - 2)
-            self.console.print(f" 🟥 Malus : 🗡️ The {self._name} FAILED to steal HP from the {target._name} (rolled : {roll}) ! {self._name}'s life steal reduced by {2}.")
+            self.console.print(f" 🟥 Malus : 🗡️ The {self._name} FAILED to steal HP from the {target.get_name()} (rolled : {roll}) ! {self._name}'s life steal reduced by {2}.")
             return damages
              
         return damages
@@ -101,7 +101,7 @@ class Samurai(Character):
     def compute_damages(self, roll, target: Character):
         damage = super().compute_damages(roll, target)
         if roll == self._dice._faces:
-            self.console.print(f" 🟩 Bonus : 👺 The {self._name} inflicted a deep wound making {target._name} bleed for additional {self._bleed_damage} overturns damages (rolled = {roll})")
+            self.console.print(f" 🟩 Bonus : 👺 The {self._name} inflicted a deep wound making {target.get_name()} bleed for additional {self._bleed_damage} overturns damages (rolled = {roll})")
             damage += self._bleed_damage
             self._bleed_damage += self._bleed_damage
             return damage
@@ -128,11 +128,11 @@ class Mage(Character):
         damage = super().compute_damages(roll, target)
         if roll == self._dice._faces:
             self.console.print(f" 🟩 Bonus : 🧙 The {self._name}'s Fireball inflicts burn 🔥 ! The armor of {self._target_defense_reduction} is melting !")
-            if target._defense_value >= self._target_defense_reduction :
+            if target.get_defense_value() >= self._target_defense_reduction :
                target.apply_defense_reduction(self._target_defense_reduction)
                return damage
             else :
-                boost = self._target_defense_reduction - target._defense_value
+                boost = self._target_defense_reduction - target.get_defense_value()
                 target.apply_defense_reduction(boost)
                 return damage + boost
         elif roll == 1:
