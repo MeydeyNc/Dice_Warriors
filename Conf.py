@@ -2,7 +2,7 @@
 def set_Character(bool: bool):
     choix_premier_bloc = bool
     chemin_fichier_source = 'Character.py'
-    with open(chemin_fichier_source, 'r') as source_file:
+    with open(chemin_fichier_source, 'r', encoding='utf-8') as source_file:
         lignes_source = source_file.readlines()
 
     if choix_premier_bloc:
@@ -33,13 +33,13 @@ def set_Character(bool: bool):
 
     nouvelles_lignes_source = lignes_source[:4] + nouveau_bloc + lignes_source[12:]
 
-    with open(chemin_fichier_source, 'w') as source_file:
+    with open(chemin_fichier_source, 'w', encoding='utf-8') as source_file:
         source_file.writelines(nouvelles_lignes_source)
         
 def set_Team(bool: bool):
     choix_premier_bloc = bool
     chemin_fichier_source = 'Team.py'
-    with open(chemin_fichier_source, 'r') as source_file:
+    with open(chemin_fichier_source, 'r', encoding='utf-8') as source_file:
         lignes_source = source_file.readlines()
 
     if choix_premier_bloc:
@@ -66,7 +66,7 @@ def set_Team(bool: bool):
 
     nouvelles_lignes_source = lignes_source[:6] + nouveau_bloc + lignes_source[12:]
 
-    with open(chemin_fichier_source, 'w') as source_file:
+    with open(chemin_fichier_source, 'w', encoding='utf-8') as source_file:
         source_file.writelines(nouvelles_lignes_source)
         
 def set_conf(bool: bool):
