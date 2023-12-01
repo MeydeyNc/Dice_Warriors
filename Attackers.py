@@ -133,7 +133,7 @@ class Mage(Character):
                return damage
             else :
                 boost = self._target_defense_reduction - target._defense_value
-                target._defense_value = 0
+                target.apply_defense_reduction(boost)
                 return damage + boost
         elif roll == 1:
             self.console.print(f" 🟥 Malus : 🧙 The {self._name} FAILED to cast ! {self._name}'s Fireball 🔥 backfires 💥 , inflicting self-damages.")
