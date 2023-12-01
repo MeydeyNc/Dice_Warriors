@@ -1,15 +1,14 @@
 from __future__ import annotations
+from random import randint
 from rich.console import Console
 
 
 class Character:
-    _max_health = 20
+    _max_health = randint(18, 22)
     _current_health = _max_health
-    _attack_value = 10
-    _defense_value = 3
-    _bleed_damage = 0  
-    _rage_level = 0
-    _life_steal = 0
+    _attack_value = randint(7, 13)
+    _defense_value = randint(2, 5)
+
     console = Console()
     
     def __init__(self, name: str, dice) -> None:

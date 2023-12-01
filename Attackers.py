@@ -4,10 +4,11 @@ from Character import Character
 
 
 class Warrior(Character):
-    _max_health = randint(18, 22)
+
+    _max_health = Character._max_health + randint(2, 4)
     _current_health = _max_health
-    _attack_value = randint(25, 40)
-    _defense_value = randint(4, 7)
+    _attack_value = Character._attack_value + randint(5, 15)
+    _defense_value = Character._defense_value + randint(3, 5)
     _attack_bonus = randint(2, 5)
     
     def __str__(self):
@@ -28,10 +29,11 @@ class Warrior(Character):
 
 
 class Thief(Character):  
-    _max_health = randint(18, 22)
+
+    _max_health = Character._max_health + randint(2, 4)
     _current_health = _max_health
-    _attack_value = randint(25, 40)
-    _defense_value = randint(4, 7)
+    _attack_value = Character._attack_value + randint(15, 25)
+    _defense_value = Character._defense_value + randint(1, 3)
     _life_steal = randint(2, 5)
     
     def __str__(self):
@@ -56,10 +58,11 @@ class Thief(Character):
 
 
 class Berserker(Character):
-    _max_health = randint(18, 22)
+
+    _max_health = Character._max_health + randint(2, 4)
     _current_health = _max_health
-    _attack_value = randint(25, 40)
-    _defense_value = randint(4, 7) 
+    _attack_value = Character._attack_value + randint(15, 25)
+    _defense_value = Character._defense_value + randint(2, 4) 
     _rage_boost = 0
     
     def __str__(self):
@@ -84,10 +87,11 @@ class Berserker(Character):
 
 
 class Samurai(Character):
-    _max_health = randint(18, 22)
+
+    _max_health = Character._max_health + randint(2, 4)
     _current_health = _max_health
-    _attack_value = randint(25, 40)
-    _defense_value = randint(4, 7)
+    _attack_value = Character._attack_value + randint(15, 25)
+    _defense_value = Character._defense_value + randint(2, 6)
     _bleed_damage = randint(2, 4)  
     
     def __str__(self):
@@ -108,10 +112,11 @@ class Samurai(Character):
 
 
 class Mage(Character):
-    _max_health = randint(18, 22)
+
+    _max_health = Character._max_health + randint(2, 4)
     _current_health = _max_health
-    _attack_value = randint(25, 40)
-    _defense_value = randint(4, 7)
+    _attack_value = Character._attack_value + randint(15, 25)
+    _defense_value = Character._defense_value + randint(1, 2)
     target_defense_reduction = randint(4, 6)
     
     def __str__(self):

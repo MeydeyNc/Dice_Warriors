@@ -4,11 +4,13 @@ from Character import Character
 
 
 class Paladin(Character):
-    _max_health = randint(30,45)
+
+    _max_health = Character._max_health + randint(10,25)
     _current_health = _max_health
-    _attack_value = randint(10,15)
-    _defense_value = randint(5,15)
-    
+    _attack_value = Character._attack_value + randint(5,12)
+    _defense_value = Character._defense_value + randint(5,15)
+
+
     def __str__(self):
         return super().__str__()
     
@@ -41,11 +43,13 @@ class Paladin(Character):
 
 
 class Phantom_Warden(Character):
-    _max_health = randint(25,35)
+
+    _max_health = Character._max_health + randint(5,9)
     _current_health = _max_health
-    _attack_value = randint(10,15)
-    _defense_value = randint(10,15)
-    
+    _attack_value = Character._attack_value + randint(3,8)
+    _defense_value = Character._defense_value + randint(10,15)
+
+
     def __str__(self):
         return super().__str__()
     
@@ -67,11 +71,13 @@ class Phantom_Warden(Character):
 
 
 class Leviathan(Character):
-    _max_health = randint(25,35)
+
+    _max_health = Character._max_health + randint(8,12)
     _current_health = _max_health
-    _attack_value = randint(10,15)
-    _defense_value = randint(5,15)
-    
+    _attack_value = Character._attack_value + randint(5,7)
+    _defense_value = Character._defense_value + randint(10,15)
+
+
     def __str__(self):
         return super().__str__()
     
@@ -102,11 +108,13 @@ class Leviathan(Character):
         
 
 class Guardian(Character):
-    _max_health = randint(25,35)
+
+    _max_health = Character._max_health + randint(5,9)
     _current_health = _max_health
-    _attack_value = randint(10,15)
-    _defense_value = randint(5,15)    
-    
+    _attack_value = Character._attack_value + randint(3,8)
+    _defense_value = Character._defense_value + randint(5,15)    
+
+
     def __str__(self):
         return super().__str__()
     
@@ -127,11 +135,13 @@ class Guardian(Character):
 
                    
 class Shield_Master(Character):
-    _max_health = randint(25,35)
+
+    _max_health = Character._max_health + randint(2,5)
     _current_health = _max_health
-    _attack_value = randint(10,15)
-    _defense_value = randint(5,15)    
-    
+    _attack_value = Character._attack_value + randint(3,8)
+    _defense_value = Character._defense_value + randint(7,15)  
+
+
     def __str__(self):
         return super().__str__()
     
