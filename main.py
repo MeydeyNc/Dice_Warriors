@@ -1,11 +1,16 @@
 from __future__ import annotations
 from random import choice
+import time
 
 from Team import Team
 from Fight import attack_team, check_for_win
+from Conf import set_conf
 
+set_conf(True)
 
 if __name__ == "__main__":
+    
+    
     red_team = Team(is_red_team=True)
     blue_team = Team(is_red_team=False)
     red_attacker_turn = choice([True, False])

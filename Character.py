@@ -3,12 +3,13 @@ from random import randint
 from rich.console import Console
 
 
+
+
 class Character:
     _max_health = randint(18, 22)
     _current_health = _max_health
     _attack_value = randint(7, 13)
     _defense_value = randint(2, 5)
-
     console = Console()
     
     def __init__(self, name: str, dice) -> None:

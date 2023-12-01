@@ -151,9 +151,9 @@ class Shield_Master(Character):
             self.console.print(f" 🟥 Malus : 🛡️ The {self._name} didn't succeeded in his parry")
             return super().compute_wounds(damages, roll, attacker)
         elif rollD6 == 6:
-            self.console.print(f" 🟩 Bonus : 🛡️ The {self._name} parried your attack for a Critical Hit 💢 ! (Sends back {damages})")
-            attacker.decrease_health(damages) 
-            return 0
+            self.console.print(f" 🟩 Bonus : 🛡️ The {self._name} parried your attack for a Critical Hit 💢 ! (Sends back {min(self._current_health -1, damages)})")
+            attacker.decrease_health(min(attacker._current_health -1, damages)) 
+            return super().compute_wounds(0, roll, attacker)
         else:
             self.console.print(f" 🟩 Bonus : 🛡️ The {self._name} parried your attack 💫 ! ({damages}/{rollD6} ≈ {round(damages/rollD6)})")
             return super().compute_wounds(round(damages/rollD6), roll, attacker)

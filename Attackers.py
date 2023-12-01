@@ -21,8 +21,8 @@ class Warrior(Character):
             damages += self._attack_bonus
             self._attack_bonus += self._attack_bonus
         elif roll == 1:
-            self.console.print(f" 🟥 Malus : ⚔️ The {self._name} failed to attack  (rolled : {roll}) ! The {self._name}'s sword comes back straight to his face 😵 The {self._name} takes {self._attack_bonus} damages.")
-            self.decrease_health(self._attack_bonus)
+            self.console.print(f" 🟥 Malus : ⚔️ The {self._name} failed to attack  (rolled : {roll}) ! The {self._name}'s sword comes back straight to his face 😵 The {self._name} takes {min(self._current_health -1, self._attack_bonus)} damages.")
+            self.decrease_health(min(self._current_health -1, self._attack_bonus))
             damages = 0
 
         return damages
@@ -105,8 +105,8 @@ class Samurai(Character):
             self._bleed_damage += self._bleed_damage
             return damage
         elif roll == 1:
-            self.console.print(f" 🟥 Malus : 👺 The {self._name} failed to attack ! The {self._name} inflicts self-damage, loosing {self._bleed_damage if self._bleed_damage <= self._current_health - self._bleed_damage else self._current_health} HP")
-            self.decrease_health(self._bleed_damage)
+            self.console.print(f" 🟥 Malus : 👺 The {self._name} failed to attack ! The {self._name} inflicts self-damage, loosing {min(self._current_health -1, self._bleed_damage)} HP")
+            self.decrease_health(min(self._current_health -1, self._bleed_damage))
             return 0
         return damage
 
@@ -117,7 +117,7 @@ class Mage(Character):
     _current_health = _max_health
     _attack_value = Character._attack_value + randint(15, 25)
     _defense_value = Character._defense_value + randint(1, 2)
-    target_defense_reduction = randint(4, 6)
+    _target_defense_reduction = randint(4, 6)
     
     def __str__(self):
         return super().__str__()
@@ -126,17 +126,17 @@ class Mage(Character):
         self.console.print(f" 🌌🧙 {self._name} casts Fireball 🔥 !")
         damage = super().compute_damages(roll, target)
         if roll == self._dice._faces:
-            self.console.print(f" 🟩 Bonus : 🧙 The {self._name}'s Fireball inflicts burn 🔥 ! The armor of {self.target_defense_reduction} is melting !")
-            if target._defense_value >= self.target_defense_reduction :
-               target.apply_defense_reduction(self.target_defense_reduction)
+            self.console.print(f" 🟩 Bonus : 🧙 The {self._name}'s Fireball inflicts burn 🔥 ! The armor of {self._target_defense_reduction} is melting !")
+            if target._defense_value >= self._target_defense_reduction :
+               target.apply_defense_reduction(self._target_defense_reduction)
                return damage
             else :
-                boost = self.target_defense_reduction - target._defense_value
+                boost = self._target_defense_reduction - target._defense_value
                 target._defense_value = 0
                 return damage + boost
         elif roll == 1:
             self.console.print(f" 🟥 Malus : 🧙 The {self._name} FAILED to cast ! {self._name}'s Fireball 🔥 backfires 💥 , inflicting self-damages.")
-            self.decrease_health(self.target_defense_reduction)
+            self.decrease_health(min(self._current_health -1, self._target_defense_reduction))
             return damage
         
         return damage

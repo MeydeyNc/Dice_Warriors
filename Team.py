@@ -5,11 +5,13 @@ from Attackers import Samurai, Berserker, Mage, Thief, Warrior
 from Tank import Paladin, Leviathan, Phantom_Warden, Shield_Master, Guardian
 from Dice import Dice
 
-
 class Team:
+
     _game_dice = randint(4,9)
-    _max_instances = 1 # of each class
-    _team_len = randint(1,5)* _max_instances # by type_class (= class file name) (1 to 5*_max_instances)  
+    _max_instances = 1
+    _team_len = randint(1,5)* _max_instances
+    
+    
     def __init__(self, is_red_team: bool):
         self.is_red_team = is_red_team
         self.tanks = self._create_team([Paladin, Leviathan, Phantom_Warden, Shield_Master, Guardian], self._max_instances)
