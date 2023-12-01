@@ -40,7 +40,7 @@ class Thief(Character):
         return super().__str__()
 
     def compute_damages(self, roll, target: Character):
-        self.console.print(f" 🟩 Bonus: 🗡️ {self._name}'s sneaky attack 🗡️ ignored the {target._name}'s defense : {target.get_defense_value()})")
+        self.console.print(f" 🟩 Bonus : 🗡️ {self._name}'s sneaky attack 🗡️ ignored the {target._name}'s defense : {target.get_defense_value()})")
         damages = super().compute_damages(roll, target) + target.get_defense_value()
 
         if roll == self._dice._faces: 
