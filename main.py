@@ -1,11 +1,8 @@
 from __future__ import annotations
-import importlib
 from random import choice
-import time
 
 from Team import Team
 from Fight import attack_team, check_for_win
-from Conf import set_conf
 
 
 if __name__ == "__main__":

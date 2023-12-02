@@ -26,6 +26,9 @@ class Character:
     def get_current_health(self):
         return self._current_health
         
+    def get_attack_value(self):
+        return self._attack_value
+    
     def get_defense_value(self):
         return self._defense_value
     

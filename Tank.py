@@ -1,7 +1,7 @@
 from random import randint
 
 from Character import Character
-
+from Dice import Dice
 
 class Paladin(Character):
     _max_health = Character._max_health + randint(10,25)
@@ -14,7 +14,7 @@ class Paladin(Character):
     
     def decrease_health(self, amount):
         if (amount >= 0):
-            rollD4 = randint(1,4)
+            rollD4 = Dice(4).roll()
             if rollD4 == 1:
                 if amount <= 0 :
                     amount = 0
@@ -85,7 +85,7 @@ class Leviathan(Character):
            if coinThrow == 1:
                self.console.print(f"🟥 Malus : 🐙 The {self._name} tried but failed to restore health points")            
            else : 
-               restore_roll = randint(1,10)
+               restore_roll = Dice(10).roll()
                if (restore_roll == 10):
                     self.console.print(f" 🟩 Bonus : 🐙 The {self._name} restored {restore_roll} health points ✨")
                     if (self._current_health + restore_roll > self._max_health):
@@ -121,7 +121,7 @@ class Guardian(Character):
             amount = self._current_health
             super().decrease_health(amount) 
         else:
-            rollD4 = randint(1,4)
+            rollD4 = Dice(4).roll()
             if not rollD4 == 4:
                 self.console.print(f" 🟥 Malus :  ♖ The {self._name} failed to gain defense as he's weakened by the Attacker 💔")
                 super().decrease_health(amount) 
@@ -144,7 +144,7 @@ class Shield_Master(Character):
         return f" 🛡️  I'm {self._name} with attack: [#FFA500]{self._attack_value}[/#FFA500] and defense: [#00A5FF]{self._defense_value}[/#00A5FF] 🛡️"
     
     def compute_wounds(self, damages, roll, attacker: Character):
-        rollD6 = randint(1,6)
+        rollD6 = Dice(6).roll()
         if rollD6 == 1:
             self.console.print(f" 🟥 Malus : 🛡️ The {self._name} didn't succeeded in his parry")
             return super().compute_wounds(damages, roll, attacker)
