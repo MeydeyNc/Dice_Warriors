@@ -16,6 +16,7 @@ class Team:
         self.is_red_team = is_red_team
         self.tanks = self._create_team([Paladin, Leviathan, Phantom_Warden, Shield_Master, Guardian], self._max_instances)
         self.attackers = self._create_team([Samurai, Berserker, Mage, Thief, Warrior], self._max_instances)
+    
     def _create_team(self, character_classes, max_instances):
         character_instances = []
 
