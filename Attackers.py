@@ -18,11 +18,11 @@ class Warrior(Character):
     def compute_damages(self, roll, target):
         damages = super().compute_damages(roll, target)
         if roll == self._dice._faces:
-            self.console.print(f" 🟩 Bonus : ⚔️ The {self._name}'s sword slashed severely {target.get_name()} with {self._attack_bonus} attack bonus 💢")
+            self.console.print(f" 🟩 Bonus : ⚔️  The {self._name}'s sword slashed severely {target.get_name()} with {self._attack_bonus} attack bonus 💢")
             damages += self._attack_bonus
             self._attack_bonus += self._attack_bonus
         elif roll == 1:
-            self.console.print(f" 🟥 Malus : ⚔️ The {self._name} failed to attack  (rolled : {roll}) ! The {self._name}'s sword comes back straight to his face 😵 The {self._name} takes {min(self._current_health -1, self._attack_bonus)} damages.")
+            self.console.print(f" 🟥 Malus : ⚔️  The {self._name} failed to attack  (rolled : {roll}) ! The {self._name}'s sword comes back straight to his face 😵 The {self._name} takes {min(self._current_health -1, self._attack_bonus)} damages.")
             self.decrease_health(min(self._current_health -1, self._attack_bonus))
             damages = 0
 
@@ -38,21 +38,21 @@ class Thief(Character):
     _life_steal = randint(2, 5)
     
     def __str__(self):
-        return f" 🗡️  I'm {self._name} with attack: [#FFA500]{self._attack_value}[/#FFA500] and defense: [#00A5FF]{self._defense_value}[/#00A5FF] 🗡️"
+        return f" 🗡️  I'm {self._name} with attack: [#FFA500]{self._attack_value}[/#FFA500] and defense: [#00A5FF]{self._defense_value}[/#00A5FF]  🗡️"
 
     def compute_damages(self, roll, target: Character):
-        self.console.print(f" 🟩 Bonus : 🗡️ {self._name}'s sneaky attack 🗡️ ignored the {target.get_name()}'s defense : {target.get_defense_value()})")
+        self.console.print(f" 🟩 Bonus : 🗡️  {self._name}'s sneaky attack 🗡️  ignored the {target.get_name()}'s defense : {target.get_defense_value()})")
         damages = super().compute_damages(roll, target) + target.get_defense_value()
 
         if roll == self._dice._faces: 
             if self._current_health < self._max_health:
                 self._current_health = min(self._current_health + self._life_steal, self._max_health)
-                self.console.print(f" 🟩 Bonus : 🗡️ The {self._name} Additional damages ! {self._name} performs Life steal 👤 gaining {self._life_steal} HP")
+                self.console.print(f" 🟩 Bonus : 🗡️  The {self._name} Additional damages ! {self._name} performs Life steal 👤 gaining {self._life_steal} HP")
                 self.show_healthbar()
                 return damages
         elif roll == 1:
             self._life_steal = max(0, self._life_steal - 2)
-            self.console.print(f" 🟥 Malus : 🗡️ The {self._name} FAILED to steal HP from the {target.get_name()} (rolled : {roll}) ! {self._name}'s life steal reduced by {2}.")
+            self.console.print(f" 🟥 Malus : 🗡️  The {self._name} FAILED to steal HP from the {target.get_name()} (rolled : {roll}) ! {self._name}'s life steal reduced by {2}.")
             return damages
              
         return damages
