@@ -61,7 +61,7 @@ def set_Team(bool: bool):
             '\n'
             '    _game_dice = ask_user("Choose game dice :   ")\n',
             '    _max_instances = 1\n',
-            '    _team_len = ask_user("Choose team length :   ")\n',
+            '    _team_len = ask_user("Choose team length (5 max):   ")\n',
         ]
 
     nouvelles_lignes_source = lignes_source[:6] + nouveau_bloc + lignes_source[12:]
