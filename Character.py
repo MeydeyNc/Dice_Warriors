@@ -11,6 +11,8 @@ class Character:
     _attack_value = randint(7, 13)
     _defense_value = randint(2, 5)
     
+    console = Console()
+    
     def __init__(self, name: str, dice) -> None:
         self._name = name
         self._dice = dice
