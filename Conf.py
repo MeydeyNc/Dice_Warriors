@@ -8,7 +8,7 @@ def set_Character(bool: bool):
     if choix_premier_bloc:
         nouveau_bloc = [
             '\n'
-            '\n'
+            '# Do not remove blanck ! \n'
             '\n'
             'class Character:'
             '\n'

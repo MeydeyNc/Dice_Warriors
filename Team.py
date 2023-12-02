@@ -4,12 +4,12 @@ from random import randint, shuffle
 from Attackers import Samurai, Berserker, Mage, Thief, Warrior
 from Tank import Paladin, Leviathan, Phantom_Warden, Shield_Master, Guardian
 from Dice import Dice
+from advanced import ask_user
 
 class Team:
-
-    _game_dice = randint(4,9)
+    _game_dice = ask_user("Choose game dice :   ")
     _max_instances = 1
-    _team_len = randint(1,5)* _max_instances
+    _team_len = ask_user("Choose team length :   ")
     
     
     def __init__(self, is_red_team: bool):

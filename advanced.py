@@ -21,5 +21,9 @@ def ask_user(question:str):
 
 if __name__ == "__main__":
     set_conf(False)
-    exec(open("main.py").read())
+    try:
+        exec(open("main.py").read())
+    except KeyboardInterrupt :
+        set_conf(True)
+        raise KeyboardInterrupt("A head smashed your keyboard ...")
     set_conf(True)

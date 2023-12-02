@@ -2,15 +2,14 @@ from __future__ import annotations
 from random import randint
 from rich.console import Console
 
-
-
+from advanced import ask_user
 
 class Character:
-    _max_health = randint(18, 22)
+    _max_health = ask_user("Choose default max health value :   ")
     _current_health = _max_health
-    _attack_value = randint(7, 13)
-    _defense_value = randint(2, 5)
-    console = Console()
+    _attack_value = ask_user("Choose default attack value, def will be attack/3 :   ")
+    _defense_value = round(_attack_value / 3) + randint(-2, 3)
+
     
     def __init__(self, name: str, dice) -> None:
         self._name = name
