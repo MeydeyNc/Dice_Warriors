@@ -40,5 +40,9 @@ def select_characters(character_type: str):
         print(chosen_characters)
         return chosen_characters
 
-selected_tank_characters = select_characters("Tank")
-selected_attacker_characters = select_characters("Attacker")
+# selected_tank_characters = select_characters("Tank")
+# selected_attacker_characters = select_characters("Attacker")
+
+if __name__ == "__main__":
+    exec(open("main.py").read())
+    
