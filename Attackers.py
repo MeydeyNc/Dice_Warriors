@@ -13,7 +13,7 @@ class Warrior(Character):
     _attack_bonus = randint(2, 5)
     
     def __str__(self):
-        return super().__str__()
+        return f" ⚔️  I'm {self._name} with attack: [#FFA500]{self._attack_value}[/#FFA500] and defense: [#00A5FF]{self._defense_value}[/#00A5FF] ⚔️" 
     
     def compute_damages(self, roll, target):
         damages = super().compute_damages(roll, target)
@@ -38,7 +38,7 @@ class Thief(Character):
     _life_steal = randint(2, 5)
     
     def __str__(self):
-        return super().__str__()
+        return f" 🗡️  I'm {self._name} with attack: [#FFA500]{self._attack_value}[/#FFA500] and defense: [#00A5FF]{self._defense_value}[/#00A5FF] 🗡️"
 
     def compute_damages(self, roll, target: Character):
         self.console.print(f" 🟩 Bonus : 🗡️ {self._name}'s sneaky attack 🗡️ ignored the {target.get_name()}'s defense : {target.get_defense_value()})")
@@ -67,7 +67,7 @@ class Berserker(Character):
     _rage_boost = 0
     
     def __str__(self):
-        return super().__str__()
+        return f" 🐻 I'm {self._name} with attack: [#FFA500]{self._attack_value}[/#FFA500] and defense: [#00A5FF]{self._defense_value}[/#00A5FF] 🐻"
     
     def compute_damages(self, roll, target: Character):
         self._rage_boost += 2
@@ -96,7 +96,7 @@ class Samurai(Character):
     _bleed_damage = randint(2, 4)  
     
     def __str__(self):
-        return super().__str__()
+        return f" 👺 I'm {self._name} with attack: [#FFA500]{self._attack_value}[/#FFA500] and defense: [#00A5FF]{self._defense_value}[/#00A5FF] 👺"
     
     def compute_damages(self, roll, target: Character):
         damage = super().compute_damages(roll, target)
@@ -121,7 +121,7 @@ class Mage(Character):
     _target_defense_reduction = randint(4, 6)
     
     def __str__(self):
-        return super().__str__()
+        return f" 🧙 I'm {self._name} with attack: [#FFA500]{self._attack_value}[/#FFA500] and defense: [#00A5FF]{self._defense_value}[/#00A5FF] 🧙"
     
     def compute_damages(self, roll, target: Character):
         self.console.print(f" 🌌🧙 {self._name} casts Fireball 🔥 !")

@@ -44,11 +44,11 @@ class Character:
     def show_healthbar(self):
         missing_hp = self._max_health - self._current_health
         if self._current_health < self._max_health and self._current_health > 0:
-            healthbar = f" {self._name} [{"[green3]◼️[/green3]" * self._current_health}{"[dim]◼️[/dim]" * missing_hp}] [green]{self._current_health}[/green]/[green3]{self._max_health}[/green3] HP"
+            healthbar = f" {self._name} [{"[#E1E120]◼[/#E1E120]" * self._current_health}{"[#E11818]◼[/#E11818]" * missing_hp}] [#E1E120]{self._current_health}[/#E1E120]/[#6D9C2B]{self._max_health}[/#6D9C2B] HP"
         elif self._current_health == 0:
-            healthbar = f" {self._name} [{"[green3]◼️[/green3]" * self._current_health}{"[dim]◼️[/dim]" * missing_hp}] [grey50]{self._current_health}[/grey50]/[green3]{self._max_health}[/green3] HP"
+            healthbar = f" {self._name} [{"[#E11818]◼[/#E11818]" * self._current_health}{"[#E11818]◼[/#E11818]" * missing_hp}] [#E11818]{self._current_health}[/#E11818]/[#6D9C2B]{self._max_health}[/#6D9C2B] HP"
         else:
-            healthbar = f" {self._name} [{"[green3]◼️[/green3]" * self._current_health}{"[dim]◼️[/dim]" * missing_hp}] [green3]{self._current_health}[/green3]/[green3]{self._max_health}[/green3] HP"
+            healthbar = f" {self._name} [{"[#6D9C2B]◼[/#6D9C2B]" * self._current_health}{"[#6D9C2B]◼[/#6D9C2B]" * missing_hp}] [#6D9C2B]{self._current_health}[/#6D9C2B]/[#6D9C2B]{self._max_health}[/#6D9C2B] HP"
 
         self.console.print(healthbar)
         self.console.rule(f"{self._name}", style='bold blue3' if 'blue' not in self._name else f'bold red3')

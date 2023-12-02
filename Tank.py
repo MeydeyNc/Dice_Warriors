@@ -4,15 +4,13 @@ from Character import Character
 
 
 class Paladin(Character):
-
     _max_health = Character._max_health + randint(10,25)
     _current_health = _max_health
     _attack_value = Character._attack_value + randint(5,12)
     _defense_value = Character._defense_value + randint(5,15)
 
-
     def __str__(self):
-        return super().__str__()
+        return f" 🧝 I'm {self._name} with attack: [#FFA500]{self._attack_value}[/#FFA500] and defense: [#00A5FF]{self._defense_value}[/#00A5FF] 🧝"
     
     def decrease_health(self, amount):
         if (amount >= 0):
@@ -51,7 +49,7 @@ class Phantom_Warden(Character):
 
 
     def __str__(self):
-        return super().__str__()
+        return f" 👻 I'm {self._name} with attack: [#FFA500]{self._attack_value}[/#FFA500] and defense: [#00A5FF]{self._defense_value}[/#00A5FF] 👻"
     
     def compute_wounds(self, damages, roll, attacker):
        roll: int = self._dice.roll()
@@ -79,21 +77,21 @@ class Leviathan(Character):
 
 
     def __str__(self):
-        return super().__str__()
+        return f" 🐙 I'm {self._name} with attack: [#FFA500]{self._attack_value}[/#FFA500] and defense: [#00A5FF]{self._defense_value}[/#00A5FF] 🐙"
     
     def decrease_health(self, amount):
         if (self._current_health < self._max_health):
            coinThrow = randint(1,2)
            if coinThrow == 1:
-               self.console.print(f"🟥 Malus : 🐙 The {self._name} failed to restore health points")            
+               self.console.print(f"🟥 Malus : 🐙 The {self._name} tried but failed to restore health points")            
            else : 
                restore_roll = randint(1,10)
                if (restore_roll == 10):
-                    self.console.print(f" 🟩 Bonus : 🐙 The {self._name} restored 4 health points ✨")
+                    self.console.print(f" 🟩 Bonus : 🐙 The {self._name} restored {restore_roll} health points ✨")
                     if (self._current_health + restore_roll > self._max_health):
                         self._current_health = self._max_health
                     else:
-                        self._current_health += 10  
+                        self._current_health += restore_roll  
                elif (restore_roll == 1):
                   self.console.print(f" 🟥 Malus : 🐙 The {self._name} didn't succeed to restore health points")
                   
@@ -116,7 +114,7 @@ class Guardian(Character):
 
 
     def __str__(self):
-        return super().__str__()
+        return f" ♖ I'm {self._name} with attack: [#FFA500]{self._attack_value}[/#FFA500] and defense: [#00A5FF]{self._defense_value}[/#00A5FF] ♖"
     
     def decrease_health(self, amount):
         if (self._current_health - amount) < 0:
@@ -125,7 +123,7 @@ class Guardian(Character):
         else:
             rollD4 = randint(1,4)
             if not rollD4 == 4:
-                self.console.print(f" 🟥 Malus : ♖ The {self._name} failed to gain defense as he's weakened by the Attacker 💔")
+                self.console.print(f" 🟥 Malus :  ♖ The {self._name} failed to gain defense as he's weakened by the Attacker 💔")
                 super().decrease_health(amount) 
             else:
                 if self._current_health - amount > 0 and amount -1 > 0:
@@ -143,7 +141,7 @@ class Shield_Master(Character):
 
 
     def __str__(self):
-        return super().__str__()
+        return f" 🛡️  I'm {self._name} with attack: [#FFA500]{self._attack_value}[/#FFA500] and defense: [#00A5FF]{self._defense_value}[/#00A5FF] 🛡️"
     
     def compute_wounds(self, damages, roll, attacker: Character):
         rollD6 = randint(1,6)
