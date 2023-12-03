@@ -13,11 +13,21 @@ Ceci est un autobattler en équipe réalisé dans le cadre d'un projet Python en
 ````
 pip install -r requirements.txt
 ```` 
-#### 3. Vous aurez ici deux choix de modes de jeu ! 
+#### 3. Vous aurez ici quatre choix de modes de jeu ! 
 
- - **Le Mode Normal : Se glisser dans le main.py et lancer le script via l'exécuteur Python !**
+ - **Le Mode *Normal* : Se glisser dans le [main.py](main.py) et lancer le script via l'exécuteur Python !**
 
- - **Le *Mode Advanced* : Se glisser dans [advanced.py](advanced.py) et lancer le script via l'exécuteur Python !**
+ - **Le Mode *Advanced* : Se glisser dans [advanced.py](advanced.py) et lancer le script via l'exécuteur Python !**
+
+ - **Le Mode *Custom* : Se glisser dans [custom.py](custom.py) et lancer le script via l'exécuteur Python !**
+
+ - **Le Mode *Custom Advanced* : Se glisser dans [custom_advanced.py](custom_advanced.py) et lancer le script via l'exécuteur Python !**
+
+ *A tout moments vous pourrez lancer en ligne de commande les modes de jeux choisis ! Comme ceci : (En prenant soin de remplacer le "main.py" par le mode de jeu choisi - ex : custom_advanced.py -)*
+ 
+ ````
+ & C:/Users/MedeWiKK/AppData/Local/Programs/Python/Python312/python.exe c:/Users/MedeWiKK/Dice_Warriors/main.py
+ ````
 
 ### Le ***Mode Advanced*** permet une certaine personnalisation de l'expérience de jeu : 
  - **Un choix libre de différentes valeurs :** 
@@ -25,6 +35,26 @@ pip install -r requirements.txt
       - Une valeur d'attaque par défaut.
       - Un dé (4, 6, 10, 20, 100)
       - La taille des équipes qui s'affrontent.
+
+
+### Le ***Mode Custom*** permet une certaine personnalisation de l'expérience de jeu : 
+ - **Un choix libre des membres des équipes :** 
+      - Un dé (4, 6, 10, 20, 100)
+      - Les Tanks de l'équipe rouge.
+      - Les Attackers de l'équipe rouge.
+      - Les Tanks de l'équipe bleue.
+      - Les Attackers de l'équipe bleue.
+
+### Le ***Mode Custom Advanced*** permet une très grande personnalisation de l'expérience de jeu : 
+ - **Un choix libre des membres et des différentes valeurs :** 
+      - Une valeur max par défaut pour la vie des personnages.
+      - Une valeur d'attaque par défaut.
+      - Un dé (4, 6, 10, 20, 100)
+      - La taille des équipes qui s'affrontent.
+      - Les Tanks de l'équipe rouge.
+      - Les Attackers de l'équipe rouge.
+      - Les Tanks de l'équipe bleue.
+      - Les Attackers de l'équipe bleue.
 
 #### Vous aurez 2 catégories de classes qui seront choisies au hasard dans 2 équipes d'une taille aléatoire qui s'affronteront.
 

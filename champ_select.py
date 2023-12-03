@@ -12,7 +12,7 @@ def select_characters(character_type: str):
     else:
         raise ValueError("character_type expected !")
 
-    print(f"Choose the character numbers you want to add to the list (separated by spaces):")
+    print(f"Choose the characters, via their id, that you want to add to the Team (separated by spaces):")
     
     for i, character_class in enumerate(character_classes, start=1):
         print(f"{i}. {character_class.__name__}")
