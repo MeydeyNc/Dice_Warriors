@@ -6,5 +6,5 @@ if __name__ == "__main__":
         exec(open("custom.py").read())
     except KeyboardInterrupt :
         set_Character(True)
-        raise KeyboardInterrupt("A head smashed your keyboard ...")
+        print("Game stopped")
     set_Character(True)

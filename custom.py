@@ -5,7 +5,7 @@ from rich import print
 from Dice import Dice
 from champ_select import select_characters
 from advanced import ask_user
-from Fight import attack_team, check_for_win
+from Fight import attack_team, check_for_win, print_team
 
 
 class Custom_Team:
@@ -27,30 +27,33 @@ class Custom_Team:
         return character_instances
 
 
-    
 if __name__ == "__main__":
+    
+    try:
+        print("[bold red]RED SELECTION ! [/bold red]")
+        red_team = Custom_Team(is_red_team=True)
+        print_team(red_team)
+        print("[bold blue]BLUE SELECTION ! [/bold blue]")
+        blue_team = Custom_Team(is_red_team=False)
+        red_attacker_turn = choice([True, False])
+            
+        while any(char.is_alive() for char in red_team.attackers + red_team.tanks) and any(
+            char.is_alive() for char in blue_team.attackers + blue_team.tanks):
+            if red_attacker_turn:
+                for attacker in red_team.attackers:
+                    if attacker.is_alive():
+                        attack_team(attacker, blue_team)
 
-    print("[bold red]RED SELECTION ! [/bold red]")
-    red_team = Custom_Team(is_red_team=True)
-    print("[bold blue]BLUE SELECTION ! [/bold blue]")
-    blue_team = Custom_Team(is_red_team=False)
-    red_attacker_turn = choice([True, False])
-        
-    while any(char.is_alive() for char in red_team.attackers + red_team.tanks) and any(
-        char.is_alive() for char in blue_team.attackers + blue_team.tanks):
-        if red_attacker_turn:
-            for attacker in red_team.attackers:
-                if attacker.is_alive():
-                    attack_team(attacker, blue_team)
+                if check_for_win(red_team, blue_team):
+                    break
+            else:
+                for attacker in blue_team.attackers:
+                    if attacker.is_alive():
+                        attack_team(attacker, red_team)
 
-            if check_for_win(red_team, blue_team):
-                break
-        else:
-            for attacker in blue_team.attackers:
-                if attacker.is_alive():
-                    attack_team(attacker, red_team)
+                if check_for_win(red_team, blue_team):
+                    break
 
-            if check_for_win(red_team, blue_team):
-                break
-
-        red_attacker_turn = not red_attacker_turn
+            red_attacker_turn = not red_attacker_turn
+    except KeyboardInterrupt:
+        print("Game stopped")
