@@ -12,7 +12,7 @@ def select_characters(character_type: str):
     else:
         raise ValueError("character_type expected !")
 
-    print(f"Choisissez les numéros des personnages que vous souhaitez ajouter à la liste (séparés par des espaces):")
+    print(f"Choose the character numbers you want to add to the list (separated by spaces):")
     
     for i, character_class in enumerate(character_classes, start=1):
         print(f"{i}. {character_class.__name__}")
@@ -28,10 +28,10 @@ def select_characters(character_type: str):
             if 0 <= index < len(character_classes):
                 chosen_characters.append(character_classes[index])
             else:
-                print(f"Choix invalide : {choice}. Ignoré.")
+                print(f"Invalide choice : {choice}. Ignored.")
                 invalid_choices = True
         except ValueError:
-            print(f"Choix invalide : {choice}. Ignoré.")
+            print(f"Invalide choice : {choice}. Ignored.")
             invalid_choices = True
 
     if invalid_choices:
