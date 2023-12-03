@@ -5,7 +5,7 @@ from rich import print
 from Dice import Dice
 from champ_select import select_characters
 from advanced import ask_user
-from Fight import attack_team, check_for_win, print_team
+from Fight import attack_team, check_for_win#, print_team
 
 
 class Custom_Team:
@@ -32,11 +32,11 @@ if __name__ == "__main__":
     try:
         print("[bold red]RED SELECTION ! [/bold red]")
         red_team = Custom_Team(is_red_team=True)
-        print_team(red_team)
+        # print_team(red_team)
         print("[bold blue]BLUE SELECTION ! [/bold blue]")
         blue_team = Custom_Team(is_red_team=False)
         red_attacker_turn = choice([True, False])
-            
+        # print_team(blue_team) 
         while any(char.is_alive() for char in red_team.attackers + red_team.tanks) and any(
             char.is_alive() for char in blue_team.attackers + blue_team.tanks):
             if red_attacker_turn:

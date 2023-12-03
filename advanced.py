@@ -27,5 +27,5 @@ if __name__ == "__main__":
         exec(open("main.py").read())
     except KeyboardInterrupt :
         set_conf(True)
-        print("A head smashed your keyboard ...")
+        print("Game stopped")
     set_conf(True)

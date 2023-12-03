@@ -10,7 +10,7 @@ def select_characters(character_type: str):
     elif character_type.lower() == "attacker":
         character_classes = [Samurai, Berserker, Mage, Thief, Warrior]
     else:
-        raise ValueError("character_type expected !")
+        raise ValueError("character_type expected ! Contact us !")
 
     print(f"Choose the characters, via their id, that you want to add to the Team (separated by spaces):")
     

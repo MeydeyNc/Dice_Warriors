@@ -38,16 +38,13 @@ def check_for_win(red_team, blue_team):
         return True
     return False
 
-def print_team(team):
-    
-    console = Console()
-
-    for tank in team.tanks:
-        console.print(tank)
-
-    print("\n")
-    for attacker in team.attackers:
-        console.print(attacker)
+# def print_team(team):
+#     console = Console()
+#     for tank in team.tanks:
+#         console.print(tank)
+#     print("\n")
+#     for attacker in team.attackers:
+#         console.print(attacker)
 
 
 if __name__ == "__main__":
