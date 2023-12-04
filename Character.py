@@ -20,6 +20,9 @@ class Character:
     def __str__(self):
         return f"I'm {self._name} with [#E01631]attack[/#E01631]: [#FFA500]{self._attack_value}[/#FFA500] and [#6D05FF]defense[/#6D05FF]: [#00A5FF]{self._defense_value}[/#00A5FF]"
     
+    def printInfo(self):
+        self.console.print(f"I'm {self._name} with [#E01631]attack[/#E01631]: [#FFA500]{self._attack_value}[/#FFA500] and [#6D05FF]defense[/#6D05FF]: [#00A5FF]{self._defense_value}[/#00A5FF]")
+    
     def get_name(self):
         return self._name
     
